@@ -10,7 +10,7 @@ Takım Flutter 118
 - Berke Karaali (UI/UX Designer/Developer)
 - Başak Aydın (Developer)
 
-## Ürün İsmi
+## Bookchain
 
 ## Product Backlog URL
 [Flutter Team 118 Miro Backlog Board](https://miro.com/app/board/uXjVMBqgDPA=/?share_link_id=133335752534)
@@ -54,7 +54,26 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain 
 
 - **Sprint board update**: Sprint board screenshotları:
 
-- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü büyük çoğunluğu whatsapp üzerinden, ekstra olarak gerekli durumlarda Discord kullanarak yapılmasına karar verilmiştir. Discord kullanımı herkesin uygun olduğu vakit yapılacaktır. Daily Scrum toplantısı haftaya örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılarak bu sayfa güncellenecektir.
+- **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü büyük çoğunluğu whatsapp üzerinden, ekstra olarak gerekli durumlarda Discord kullanarak yapılmasına karar verilmiştir. Discord kullanımı herkesin uygun olduğu vakit yapılacaktır. Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 1 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/b97946f2cd7aa96a7cee7b05271c5b09c7deba3a/ProjectManagement/Sprint%201/Daily%20scrum%20Chats.docx)
 
+- **Sprint Başlangıcı Görev Dağılımı**:
 ![Backlog 1](https://raw.githubusercontent.com/orhanea/team-f118/main/ProjectManagement/Sprint%201/Trello_Sprint_1_1.png)
-![Backlog 1](https://raw.githubusercontent.com/orhanea/team-f118/main/ProjectManagement/Sprint%201/Trello_Sprint_1_1_2.png)
+![Backlog 2](https://raw.githubusercontent.com/orhanea/team-f118/main/ProjectManagement/Sprint%201/Trello_Sprint_1_1_2.png)
+
+- **Sprint Sonu Görev Durumu**:
+![Backlog 3](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/Trello_Sprint_1_3.png)
+![Backlog 4](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/Trello_Sprint_1_4.png)
+
+
+- **Bookchain Durumu**:
+
+![Screenshot 1](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/ForgotPassword.png))
+![Screenshot 2](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/Homepage.png)
+![Screenshot 3](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/Login.png)
+![Screenshot 4](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/Signin.png)
+![Screenshot 5](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/ZinciriK%C4%B1rPuan.png)
+
+- **Sprint Review**: 
+Alınan kararlar:
+
+- **Sprint Retrospective:**

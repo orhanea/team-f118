@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bookchain/meta_app/screens/onbarding.dart';
 
-// ignore: unused_import
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

@@ -143,8 +143,10 @@ class _Done extends StatelessWidget {
           shape: BoxShape.rectangle, color: ColorSpecs.colorInstance.yankeeBlue),
       child: TextButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(
-                context, ConstRoutes.homeScreenRoute);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            );
           },
           child: Icon(
             Icons.done,

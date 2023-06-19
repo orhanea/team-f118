@@ -74,6 +74,17 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain 
 ![Screenshot 5](https://github.com/orhanea/team-f118/blob/03183e7b91e85e3b73bee881c8203454e4961af8/ProjectManagement/Sprint%201/ZinciriK%C4%B1rPuan.png)
 
 - **Sprint Review**: 
-Alınan kararlar:
+Alınan kararlar: 1.sprint'te iletişim sorunları oldukça fazla olmuştur. Tabii, bunun yanında tecrübesizliğin de
+takımı etkileyen en büyük sorun olduğuna karar verdik. 2.sprintte bunun çözümü için çalışacağımızı kararlaştırdık. Firebase 
+bağlantısı kodları yazılmış olup küçük hatalar aldığımızı ve 2.sprintte ilk olarak yapılması gereken iş
+olduğunu kararlaştırdık. Aynı zamanda navigation barlarla birlikte Home Page tasarımının 2.sprintte yapılması gerektiğini konuştuk.
+Navigation bar olarak zinciri kırma navigation barınının dizaynının ve kodlarının yazılmasının bu sprintte yapılması uygun görüldü.
+Not alma kısmı da bu sprintte yapılmasına karar verildi. Puan sistemi üzerine düşünülmesi kararlaştırıldı. 3.printe aktarılması gerekenler
+bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review katılımcıları: Orhan Emre Anıl, Can Zunal, Berke Karaali, Oya Gizem Karaca, Başak aydın
 
 - **Sprint Retrospective:**
+
+  - Firebase ve firestore işlemlerinin en kısa zamanda bitirilmesi kararlaştırıldı.
+  - Home Page dizaynı ve NavBar'ların oluşturulmasına karar verilmiştir.
+  - Zinciri kırma ve not kaydetme barlarının dizaynına karar verilmiştir.
+  - Puan sistemi üzerine düşünülmesine karar verilmiştir.

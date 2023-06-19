@@ -93,7 +93,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage())
+                            builder: (context) => const SignUpScreen())
                     );
                   },
                   child: Text(

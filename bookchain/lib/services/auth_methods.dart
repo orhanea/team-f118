@@ -1,59 +1,59 @@
-import 'package:bookchain/meta_app/helpers/usage/toast_message.dart';
-import 'package:bookchain/meta_app/screens/homePage.dart';
-import 'package:bookchain/meta_app/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 
 class Authorizations {
+  
+  String? userName;
+  String? email;
+  String? password;
+  String? errorMessage;
 
-  final auth = FirebaseAuth.instance;
-  final fireStore = FirebaseFirestore.instance;
+  TextEditingController mail = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController passwords = TextEditingController();
 
-  //Email sign up
-  void signUpWithEmail({
-    required String email,
-    required String userName,
-    required String password,
-  }) async {
-    try {
-      await auth.createUserWithEmailAndPassword(email: email, password: password).then((value) =>
-      {
-        print("User is created.")
-      });
-      addUserDetails(
-          userName,
-          email,
-          password,
-      );
-    } catch (e) {
-      print(e);
+  Future<void> createUserAndCollection() async {
+    if (userName != null && email != null && password != null) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
+
+        if ( userCredential.user != null ) {
+          await createUserCollection(
+            userId: userCredential.user!.uid,
+            username: userName!,
+            email: email!,
+            password: password!,
+          );
+        }
+      } catch ( error ) {
+        errorMessage = 'Failed to create user. Please try again.';
+      }
     }
   }
 
-  void signIn({
+  Future<void> createUserCollection( {
+    required String userId,
+    required String username,
     required String email,
-    required String userName,
     required String password,
-  }) async {
+  } ) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password).then((value) =>
-      {
-        print("User is registered.")
+      await users.doc(userId).set({
+        'username': username,
+        'email': email,
+        'password': password,
       });
-    } catch (e) {
-      print(e);
+    } catch ( error ) {
+      var errorMessage = "Failed to create user. Please try again.";
     }
   }
-
-  Future addUserDetails(String userName, String email, String password) async {
-    await FirebaseFirestore.instance.collection("Users").add({
-      'User name': userName,
-      'Email': email,
-      'Password': password,
-    });
-  }
+  
 }

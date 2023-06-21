@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bookchain/services/auth_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bookchain/meta_app/components/rounded_button.dart';
 import 'package:bookchain/meta_app/components/rounded_input_field.dart';
 import 'package:bookchain/meta_app/components/rounded_password_field.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:bookchain/services/auth_methods.dart';
 
 class SignUpScreen extends StatefulWidget {
 
@@ -17,22 +19,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
 
-  TextEditingController users = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  final _auth = Authorizations();
-
-  void _registerUser() {
-    String userName = users.text.trim();
-    String userEmail = email.text.trim();
-    String userPassword = password.text.trim();
-
-    _auth.signUpWithEmail(
-      email: userEmail,
-      userName: userName,
-      password: userPassword,
-    );
-  }
+  Authorizations myAuth = Authorizations();
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +50,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   RoundedInputField(
-                    myController: users,
+                    myController: myAuth.username,
                     icon: Icons.person,
                     hintText: 'Enter your username',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        myAuth.userName = value;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -85,10 +76,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   RoundedInputField(
-                    myController: email,
+                    myController: myAuth.mail,
                     icon: Icons.email,
                     hintText: 'Enter your email',
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        myAuth.email = value;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -107,8 +102,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   RoundedPasswordField(
-                    myController: password,
-                    onChanged: (value) {},
+                    myController: myAuth.passwords,
+                    onChanged: (value) {
+                      setState(() {
+                        myAuth.password = value;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -117,7 +116,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               RoundedButton(
                 text: Strings.stringInstance.signIn,
-                press: _registerUser, // Register the user when the button is pressed
+                press: () {
+                  myAuth.createUserAndCollection(); // Register the user when the button is pressed
+                }, 
                 color: ColorSpecs.colorInstance.kPrimaryColor,
               ),
               Padding(

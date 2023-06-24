@@ -48,7 +48,7 @@ Not : Şimdilik plot il sistemi düşünüyoruz.
 
 - **Sprint içinde tamamlanması tahmin edilen puan:** 105 Puan
 
-- **Puan tamamlama mantığı:** Diğer sprintlerin planı yapıldıktan sonra düzenlenecektir. İlk sprint puanı 105'tir.
+- **Puan tamamlama mantığı:**  Toplamda proje boyunca tamamlanması gereken 320 puanlık backlog bulunmaktadır. 3 printe bölündüğünde ilk sprint en azından 100 ile başlaması gerektiğine karar verildi.
 
 Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
 
@@ -88,3 +88,8 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
   - Home Page dizaynı ve NavBar'ların oluşturulmasına karar verilmiştir.
   - Zinciri kırma ve not kaydetme barlarının dizaynına karar verilmiştir.
   - Puan sistemi üzerine düşünülmesine karar verilmiştir.
+ 
+## Sprint 2
+- **Sprint Notları:** Sprint planlama toplantısında karar verildiği üzere bu sprintte Home Page ve Chain Page tasarımları ve kodlarına odaklanılmıştır. Chain page üzerine daha fazla düşünülmesi önemli. Bu mantıkla hareket ettiğimizde Home page çalışmalarının 3.printte de devam edilmesine karar verildi. Chain page'in not alma kısımları da olduğunda o bölümün çalışmaları da 3.Sprintte devam edilmesine karar verildi.
+- **Sprint içinde tamamlanması tahmin edilen puan:** 110 
+- **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanılması gereken 320 puanlık backlog bulunmaktadır. Bu sprintte de yine toplam puanı 100 olarak belirlendi.

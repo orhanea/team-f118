@@ -1,6 +1,7 @@
 import 'package:bookchain/meta_app/components/rounded_button.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
+import 'package:bookchain/meta_app/screens/createNewGoal.dart';
 import 'package:bookchain/meta_app/screens/forgotPassword.dart';
 import 'package:bookchain/meta_app/screens/homePage.dart';
 import 'package:bookchain/meta_app/screens/signupScreen.dart';
@@ -13,32 +14,26 @@ import '../components/rounded_input_field.dart';
 import '../components/rounded_password_field.dart';
 
 class LoginScreen extends StatefulWidget {
-
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
-
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   Authorizations myAuth = Authorizations();
 
-  TextEditingController user = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-   Authorizations myAuth = Authorizations();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         height: size.height,
         width: double.infinity,
         child: SingleChildScrollView(
-          //when keyboard opens it prevent to overflow the screen
           child: Column(
             children: [
               SizedBox(
@@ -62,7 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   RoundedInputField(
                     icon: Icons.mail,
                     hintText: 'Enter your email',
-                    onChanged: (value) {}, myController: email,
+                    onChanged: (value) {},
+                    myController: email,
                   ),
                 ],
               ),
@@ -90,9 +86,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ForgotPasswordScreen()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
+                            ),
+                          );
                         },
                         child: Text(
                           Strings.stringInstance.formForgotPass,
@@ -112,15 +111,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: size.height * 0.02,
               ),
               RoundedButton(
-                text: Strings.stringInstance.loginSignIn,
-                press: () {
-
-                }, color: ColorSpecs.colorInstance.kPrimaryColor,
+                text: Strings.stringInstance.signIn,
+                press: () async {
+                  try {
+                    await myAuth.signInUser(
+                      email: email.text,
+                      password: password.text,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CreateNewGoal(),
+                      ),
+                    );
+                  } catch (error) {
+                    // Handle any error that occurs during login, such as displaying an error message.
+                  }
+                },
+                color: ColorSpecs.colorInstance.kPrimaryColor,
               ),
               SizedBox(
                 height: size.height * 0.01,
               ),
-              //or login with
               Container(
                 width: size.width * 0.8,
                 child: Row(
@@ -167,7 +179,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 20),
+                        vertical: 15,
+                        horizontal: 20,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                         side: const BorderSide(
@@ -189,9 +203,11 @@ class _LoginScreenState extends State<LoginScreen> {
               AlreadyHaveAnAccountCheck(
                 press: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUpScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -200,7 +216,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
-
-

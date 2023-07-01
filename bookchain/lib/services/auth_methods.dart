@@ -3,9 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class Authorizations {
-  
+
   String? userName;
   String? email;
   String? password;
@@ -37,6 +36,17 @@ class Authorizations {
     }
   }
 
+  Future<void> signInUser({required String email, required String password}) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (error) {
+      errorMessage = 'Failed to sign in. Please check your credentials and try again.';
+    }
+  }
+
   Future<void> createUserCollection( {
     required String userId,
     required String username,
@@ -52,8 +62,8 @@ class Authorizations {
         'password': password,
       });
     } catch ( error ) {
-      var errorMessage = "Failed to create user. Please try again.";
+      errorMessage = "Failed to create user. Please try again.";
     }
   }
-  
+
 }

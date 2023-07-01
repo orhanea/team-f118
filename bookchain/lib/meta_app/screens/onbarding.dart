@@ -8,17 +8,16 @@ import 'package:bookchain/meta_app/helpers/constants/strings.dart';
 import 'package:bookchain/meta_app/helpers/constants/textStyles.dart';
 import 'package:bookchain/meta_app/helpers/routers/constant_route.dart';
 
-class OnBoarding extends StatefulWidget {
+import 'welcomeScreens.dart';
 
+class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
-
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-
   double opacity = 1.0;
   bool visible = false;
 
@@ -26,21 +25,21 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: IntroductionScreen(
-          pages: getPages(),
-          showNextButton: true,
-          globalBackgroundColor: ColorSpecs.colorInstance.white,
-          showSkipButton: true,
-          showDoneButton: true,
-          skip: const _Skip(),
-          next: const _Next(),
-          done: const _Done(),
-          onDone: () {
-            ConstRoutes.homeScreenRoute;
-          },
-          curve: Curves.fastLinearToSlowEaseIn,
-          controlsMargin: const EdgeInsets.all(8),
-          dotsDecorator: _decorateDots(),
-        ));
+      pages: getPages(),
+      showNextButton: true,
+      globalBackgroundColor: ColorSpecs.colorInstance.white,
+      showSkipButton: true,
+      showDoneButton: true,
+      skip: const _Skip(),
+      next: const _Next(),
+      done: const _Done(),
+      onDone: () {
+        ConstRoutes.homeScreenRoute;
+      },
+      curve: Curves.fastLinearToSlowEaseIn,
+      controlsMargin: const EdgeInsets.all(8),
+      dotsDecorator: _decorateDots(),
+    ));
   }
 
   DotsDecorator _decorateDots() {
@@ -112,8 +111,9 @@ class _OnBoardingState extends State<OnBoarding> {
 }
 
 class _Next extends StatelessWidget {
-
-  const _Next({Key? key,}) : super(key: key);
+  const _Next({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,8 @@ class _Next extends StatelessWidget {
       height: 60,
       width: 60,
       decoration: BoxDecoration(
-          shape: BoxShape.rectangle, color: ColorSpecs.colorInstance.yankeeBlue),
+          shape: BoxShape.rectangle,
+          color: ColorSpecs.colorInstance.yankeeBlue),
       child: Icon(
         Icons.arrow_forward,
         color: ColorSpecs.colorInstance.white,
@@ -131,8 +132,9 @@ class _Next extends StatelessWidget {
 }
 
 class _Done extends StatelessWidget {
-
-  const _Done({Key? key,}) : super(key: key);
+  const _Done({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +142,8 @@ class _Done extends StatelessWidget {
       height: 60,
       width: 60,
       decoration: BoxDecoration(
-          shape: BoxShape.rectangle, color: ColorSpecs.colorInstance.yankeeBlue),
+          shape: BoxShape.rectangle,
+          color: ColorSpecs.colorInstance.yankeeBlue),
       child: TextButton(
           onPressed: () {
             Navigator.push(
@@ -157,15 +160,15 @@ class _Done extends StatelessWidget {
 }
 
 class _Skip extends StatelessWidget {
-
-  const _Skip({Key? key,}) : super(key: key);
+  const _Skip({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          Navigator.pushReplacementNamed(
-              context, ConstRoutes.homeScreenRoute);
+          Navigator.pushReplacementNamed(context, ConstRoutes.homeScreenRoute);
         },
         child: Text(Strings.stringInstance.passToLogin,
             style: TextStyles.styleInstance.largeMedium
@@ -179,11 +182,11 @@ class _WidgetForOnBoardingBody extends StatelessWidget {
   final String subTitle;
   const _WidgetForOnBoardingBody(
       {Key? key,
-        required this.opacity,
-        required this.visible,
-        required this.title,
-        required this.subTitle,
-        required this.path})
+      required this.opacity,
+      required this.visible,
+      required this.title,
+      required this.subTitle,
+      required this.path})
       : super(key: key);
 
   final double opacity;
@@ -210,10 +213,10 @@ class _WidgetForOnBoardingBody extends StatelessWidget {
       ),
       Center(
           child: Text(
-            title,
-            style: TextStyles.styleInstance.title1
-                .copyWith(color: ColorSpecs.colorInstance.yankeeBlue),
-          )),
+        title,
+        style: TextStyles.styleInstance.title1
+            .copyWith(color: ColorSpecs.colorInstance.yankeeBlue),
+      )),
       const SizedBox(
         height: 30,
       ),
@@ -239,14 +242,4 @@ class _CardImages extends StatelessWidget {
           image: DecorationImage(image: images, fit: BoxFit.contain)),
     );
   }
-
 }
-
-
-
-
-
-
-
-
-

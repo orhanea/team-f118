@@ -93,3 +93,10 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
 - **Sprint Notları:** Sprint planlama toplantısında karar verildiği üzere bu sprintte Home Page ve Chain Page tasarımları ve kodlarına odaklanılmıştır. Chain page üzerine daha fazla düşünülmesi önemli. Bu mantıkla hareket ettiğimizde Home page çalışmalarının 3.printte de devam edilmesine karar verildi. Chain page'in not alma kısımları da olduğunda o bölümün çalışmaları da 3.Sprintte devam edilmesine karar verildi.
 - **Sprint içinde tamamlanması tahmin edilen puan:** 110 
 - **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanılması gereken 320 puanlık backlog bulunmaktadır. Bu sprintte de yine toplam puanı 100 olarak belirlendi.
+  
+- **Daily Scrum**: Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır.
+  
+- **Bookchain Durumu**: Ekran görüntüleri:
+- **Sprint Review**: 
+- **Sprint Retrospective:**
+

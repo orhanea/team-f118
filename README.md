@@ -91,12 +91,24 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
  
 ## Sprint 2
 - **Sprint Notları:** Sprint planlama toplantısında karar verildiği üzere bu sprintte Home Page ve Chain Page tasarımları ve kodlarına odaklanılmıştır. Chain page üzerine daha fazla düşünülmesi önemli. Bu mantıkla hareket ettiğimizde Home page çalışmalarının 3.printte de devam edilmesine karar verildi. Chain page'in not alma kısımları da olduğunda o bölümün çalışmaları da 3.Sprintte devam edilmesine karar verildi.
+  
 - **Sprint içinde tamamlanması tahmin edilen puan:** 110 
 - **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanılması gereken 320 puanlık backlog bulunmaktadır. Bu sprintte de yine toplam puanı 100 olarak belirlendi.
-  
-- **Daily Scrum**: Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır.
+
+- **Sprint Başlangıcı Görev Dağılımı**:
+![Backlog 1](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/1.PNG)
+- **Sprint Sonu Görev Durumu**:
+![Backlog 2](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/5.PNG)
+
+- **Daily Scrum**: Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 2 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/Scrum%20Chats.docx)
+
   
 - **Bookchain Durumu**: Ekran görüntüleri:
-- **Sprint Review**: 
+- **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir. Sprint Review katılımcıları: Orhan Emre Anıl, Can Zunal, Berke Karaali
+  
 - **Sprint Retrospective:**
+-Donation page implementasyonunun 3. sprintte yapılmasına karar verildi.
+-Firebase kullanarak kullanıcıya bildirimler gönderilmesininin 3. sprintte yapılmasına karar verildi.
+-Chain page'e not ekleme özelliğinin getirilmesine karar verildi.
+-Firebase ve firestore login işlemlerinde çalışıyor fakat diğer kaydedilmesi gereken yerlerde tamamlamasında karar verildi.
 

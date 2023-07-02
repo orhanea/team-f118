@@ -102,13 +102,19 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
 
 - **Daily Scrum**: Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 2 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/Scrum%20Chats.docx)
 
-  
+![Screenshot 6](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/calendarCreateNewGoal.PNG)
+![Screenshot 7](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/createNewGoalPage.PNG)
+![Screenshot 8](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/validationCreateNewGoal.PNG)
+![Screenshot 9](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/goalsPage.PNG)
+![Screenshot 10](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/goalsPage_2.PNG)
+
+
 - **Bookchain Durumu**: Ekran görüntüleri:
 - **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir. Sprint Review katılımcıları: Orhan Emre Anıl, Can Zunal, Berke Karaali
   
 - **Sprint Retrospective:**
--Donation page implementasyonunun 3. sprintte yapılmasına karar verildi.
--Firebase kullanarak kullanıcıya bildirimler gönderilmesininin 3. sprintte yapılmasına karar verildi.
--Chain page'e not ekleme özelliğinin getirilmesine karar verildi.
--Firebase ve firestore login işlemlerinde çalışıyor fakat diğer kaydedilmesi gereken yerlerde tamamlamasında karar verildi.
+  - Donation page implementasyonunun 3. sprintte yapılmasına karar verildi.
+  - Firebase kullanarak kullanıcıya bildirimler gönderilmesininin 3. sprintte yapılmasına karar verildi.
+  - Chain page'e not ekleme özelliğinin getirilmesine karar verildi.
+  - Firebase ve firestore login işlemlerinde çalışıyor fakat diğer kaydedilmesi gereken yerlerde tamamlamasında karar verildi.
 

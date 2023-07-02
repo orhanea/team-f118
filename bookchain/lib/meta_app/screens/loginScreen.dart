@@ -119,10 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       email: email.text,
                       password: password.text,
                     );
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChainPage(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   } catch (error) {

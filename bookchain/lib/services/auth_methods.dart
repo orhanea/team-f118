@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class Authorizations {
-
   String? userName;
   String? email;
   String? password;
@@ -17,12 +16,13 @@ class Authorizations {
   Future<void> createUserAndCollection() async {
     if (userName != null && email != null && password != null) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email!,
           password: password!,
         );
 
-        if ( userCredential.user != null ) {
+        if (userCredential.user != null) {
           await createUserCollection(
             userId: userCredential.user!.uid,
             username: userName!,
@@ -30,29 +30,31 @@ class Authorizations {
             password: password!,
           );
         }
-      } catch ( error ) {
+      } catch (error) {
         errorMessage = 'Failed to create user. Please try again.';
       }
     }
   }
 
-  Future<void> signInUser({required String email, required String password}) async {
+  Future<void> signInUser(
+      {required String email, required String password}) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
     } catch (error) {
-      errorMessage = 'Failed to sign in. Please check your credentials and try again.';
+      errorMessage =
+          'Failed to sign in. Please check your credentials and try again.';
     }
   }
 
-  Future<void> createUserCollection( {
+  Future<void> createUserCollection({
     required String userId,
     required String username,
     required String email,
     required String password,
-  } ) async {
+  }) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     try {
@@ -61,9 +63,8 @@ class Authorizations {
         'email': email,
         'password': password,
       });
-    } catch ( error ) {
+    } catch (error) {
       errorMessage = "Failed to create user. Please try again.";
     }
   }
-
 }

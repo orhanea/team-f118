@@ -24,21 +24,20 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: StreamBuilder(
-        stream: null,
-        builder: (context, snapshot) {
-          return AnimatedSplashScreen(
-            splash: const Image(
-              image: AssetImage('assets/images/ouap.png'),
-              height: 300.0,
-              width: 300.0,
-            ),
-            duration: 3000,
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: const Color.fromARGB(255, 236, 236, 236),
-            nextScreen: const OnBoarding(),
-          );
-        }
-      ),
+          stream: null,
+          builder: (context, snapshot) {
+            return AnimatedSplashScreen(
+              splash: const Image(
+                image: AssetImage('assets/images/ouap.png'),
+                height: 300.0,
+                width: 300.0,
+              ),
+              duration: 3000,
+              splashTransition: SplashTransition.fadeTransition,
+              backgroundColor: const Color.fromARGB(255, 236, 236, 236),
+              nextScreen: const OnBoarding(),
+            );
+          }),
     );
   }
 }

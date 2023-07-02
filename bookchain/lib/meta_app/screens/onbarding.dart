@@ -167,12 +167,18 @@ class _Skip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, ConstRoutes.homeScreenRoute);
-        },
-        child: Text(Strings.stringInstance.passToLogin,
-            style: TextStyles.styleInstance.largeMedium
-                .copyWith(color: ColorSpecs.colorInstance.yankeeBlue)));
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WelcomeScreen()),
+        );
+      },
+      child: Text(
+        Strings.stringInstance.passToLogin,
+        style: TextStyles.styleInstance.largeMedium
+            .copyWith(color: ColorSpecs.colorInstance.yankeeBlue),
+      ),
+    );
   }
 }
 

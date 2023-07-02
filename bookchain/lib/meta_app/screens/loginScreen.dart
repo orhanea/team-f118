@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../components/already_have_account.dart';
 import '../components/rounded_input_field.dart';
 import '../components/rounded_password_field.dart';
+import 'chainPage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -121,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CreateNewGoal(),
+                        builder: (context) => ChainPage(),
                       ),
                     );
                   } catch (error) {

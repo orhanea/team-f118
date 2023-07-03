@@ -47,7 +47,7 @@ Not : Şimdilik plot il sistemi düşünüyoruz.
 - **Sprint Notları:** İlk biraraya gelişimiz 5 Haziran'da oldu. Proje fikrine net olarak 6 Haziran'da karar verildi. İş listeleri ve 1. Sprint planı 7 Haziran'da yapıldı. Diğer 2 sprint planı 2.haftada oluşturulmasına karar verildi. Takım olarak proje yönetiminde Jira, Asana denemelerinden sonra Trello kullanımı kararlaştırılmıştır. User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında açıklama kısmında hikayelerin detayları okunabilir. Tasklar kırmızı kapakla gösterilmiş olup, backloglardan ayrı olarak gösterilmiştir.
 - **Sprint içinde tamamlanması tahmin edilen puan:** 105 Puan
 - **Puan tamamlama mantığı:**  Toplamda proje boyunca tamamlanması gereken 320 puanlık backlog bulunmaktadır. 3 printe bölündüğünde ilk sprint en azından 100 ile başlaması gerektiğine karar verildi.
-**NOTE**:Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
+- **NOTE**: Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
 - **Sprint board update**: Sprint board screenshotları:
 - **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü büyük çoğunluğu whatsapp üzerinden, ekstra olarak gerekli durumlarda Discord kullanarak yapılmasına karar verilmiştir. Discord kullanımı herkesin uygun olduğu vakit yapılacaktır. Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 1 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/b97946f2cd7aa96a7cee7b05271c5b09c7deba3a/ProjectManagement/Sprint%201/Daily%20scrum%20Chats.docx)
 
@@ -87,6 +87,7 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 - **Sprint Notları:** Sprint planlama toplantısında karar verildiği üzere bu sprintte Home Page ve Chain Page tasarımları ve kodlarına odaklanılmıştır. Chain page üzerine daha fazla düşünülmesi önemli. Bu mantıkla hareket ettiğimizde Home page çalışmalarının 3.printte de devam edilmesine karar verildi. Chain page'in not alma kısımları da olduğunda o bölümün çalışmaları da 3.Sprintte devam edilmesine karar verildi.
 - **Sprint içinde tamamlanması tahmin edilen puan:** 110 
 - **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanılması gereken 320 puanlık backlog bulunmaktadır. Bu sprintte de yine toplam puanı 100 olarak belirlendi.
+- **NOTE**: Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
 
 - **Sprint Başlangıcı Görev Dağılımı**:
 ![Backlog 1](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/1.PNG)

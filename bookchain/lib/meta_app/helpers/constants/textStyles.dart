@@ -38,5 +38,4 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 15,
   );
-
 }

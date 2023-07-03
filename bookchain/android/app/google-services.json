@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "587134917326",
+    "project_id": "book-chain-840f7",
+    "storage_bucket": "book-chain-840f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587134917326:android:39c121f049883a1d0bce9f",
+        "android_client_info": {
+          "package_name": "com.example.bookchain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587134917326-db17d6ncbldi73vv3gvpdmol0bsbad2s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookchain",
+            "certificate_hash": "781af9323bd1c4339654dd41fae18cbd426df560"
+          }
+        },
+        {
+          "client_id": "587134917326-lvglben4fnuhud8p3ms8vssvqaoe5a96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookchain",
+            "certificate_hash": "0e5ed3dca915b5270ee7e5d679b7629c11685fe8"
+          }
+        },
+        {
+          "client_id": "587134917326-udq1lmrk1epqg2nmdg0id867l9jrdlo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookchain",
+            "certificate_hash": "71f83c58737f12a18469156d951cad5d43fed8dd"
+          }
+        },
+        {
+          "client_id": "587134917326-dq2bi0m8gljustqfdff2dkhjnrpsihq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRh28GO6OSS-yBTZ53ZooJ1ddi-bR0Xms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587134917326-48jntuqu02v06iqqsfcrvs0qmaq72cs0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

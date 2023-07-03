@@ -7,14 +7,13 @@ import '../components/rounded_button.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
 
 import 'homePage.dart';
+import 'signupScreen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -68,8 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const LoginScreen())
-                );
+                        builder: (context) => const LoginScreen()));
               },
             ),
             Container(
@@ -93,8 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignUpScreen())
-                    );
+                            builder: (context) => const SignUpScreen()));
                   },
                   child: Text(
                     Strings.stringInstance.signIn,

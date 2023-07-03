@@ -1,5 +1,4 @@
 class Strings {
-
   static Strings stringInstance = Strings._init();
 
   Strings._init();
@@ -30,7 +29,8 @@ class Strings {
   String formPassword = "Password";
   String formForgotPass = "Forgot Password ?";
   String signIn = "Sign in";
-  String policyText = "By registering, you are agreeing our terms of use and Privacy Policy.";
+  String policyText =
+      "By registering, you are agreeing our terms of use and Privacy Policy.";
   String loginSignUp = "Don't have an account?";
   String loginTextOr = "Or Login With";
   String registerSignUp = "Register";
@@ -40,10 +40,15 @@ class Strings {
   String formTextFieldPassword = "Password";
   String formTextFieldName = "Enter your name";
   String codeOTP = "Send Code";
-  String doNotWorry = "Don't worry it's occurs. Please enter the email address \nlinked with your account.";
-  String forgotPassLabel = "Enter the verification code we just send on your email address.";
+  String doNotWorry =
+      "Don't worry it's occurs. Please enter the email address \nlinked with your account.";
+  String forgotPassLabel =
+      "Enter the verification code we just send on your email address.";
   String otp = "OTP Verification";
-  String firebaseException = "Invalid Username or password. Please register again or make sure that username and password is correct";
+  String firebaseException =
+      "Invalid Username or password. Please register again or make sure that username and password is correct";
   String now = "Register now";
 
+  //Create new goal
+  String createGoal = "Create New Goal";
 }

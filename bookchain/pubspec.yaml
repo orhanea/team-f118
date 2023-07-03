@@ -52,6 +52,7 @@ dependencies:
   stacked_hooks: ^0.2.3
   table_calendar: ^3.0.9
   image_picker: ^1.0.0
+  percent_indicator: ^4.0.0
 
 
 dev_dependencies:

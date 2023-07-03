@@ -45,11 +45,13 @@ dependencies:
   cloud_firestore: ^4.8.1
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
+  firebase_storage: ^11.2.4
   fluttertoast: ^8.2.2
   provider: ^6.0.5
   stacked: ^3.4.0
   stacked_hooks: ^0.2.3
   table_calendar: ^3.0.9
+  image_picker: ^1.0.0
 
 
 dev_dependencies:

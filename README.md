@@ -45,15 +45,10 @@ Not : Şimdilik plot il sistemi düşünüyoruz.
 ## Sprint 1
 
 - **Sprint Notları:** İlk biraraya gelişimiz 5 Haziran'da oldu. Proje fikrine net olarak 6 Haziran'da karar verildi. İş listeleri ve 1. Sprint planı 7 Haziran'da yapıldı. Diğer 2 sprint planı 2.haftada oluşturulmasına karar verildi. Takım olarak proje yönetiminde Jira, Asana denemelerinden sonra Trello kullanımı kararlaştırılmıştır. User Story'ler product backlog'ların içine yazılmıştır. Product backlog item'lara tıklandığında açıklama kısmında hikayelerin detayları okunabilir. Tasklar kırmızı kapakla gösterilmiş olup, backloglardan ayrı olarak gösterilmiştir.
-
 - **Sprint içinde tamamlanması tahmin edilen puan:** 105 Puan
-
 - **Puan tamamlama mantığı:**  Toplamda proje boyunca tamamlanması gereken 320 puanlık backlog bulunmaktadır. 3 printe bölündüğünde ilk sprint en azından 100 ile başlaması gerektiğine karar verildi.
-
-Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
-
+**NOTE**:Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
 - **Sprint board update**: Sprint board screenshotları:
-
 - **Daily Scrum:** Daily Scrum toplantılarının zamansal sebeplerden ötürü büyük çoğunluğu whatsapp üzerinden, ekstra olarak gerekli durumlarda Discord kullanarak yapılmasına karar verilmiştir. Discord kullanımı herkesin uygun olduğu vakit yapılacaktır. Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 1 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/b97946f2cd7aa96a7cee7b05271c5b09c7deba3a/ProjectManagement/Sprint%201/Daily%20scrum%20Chats.docx)
 
 - **Sprint Başlangıcı Görev Dağılımı**:
@@ -80,10 +75,9 @@ bağlantısı kodları yazılmış olup küçük hatalar aldığımızı ve 2.sp
 olduğunu kararlaştırdık. Aynı zamanda navigation barlarla birlikte Home Page tasarımının 2.sprintte yapılması gerektiğini konuştuk.
 Navigation bar olarak zinciri kırma navigation barınının dizaynının ve kodlarının yazılmasının bu sprintte yapılması uygun görüldü.
 Not alma kısmı da bu sprintte yapılmasına karar verildi. Puan sistemi üzerine düşünülmesi kararlaştırıldı. 3.printe aktarılması gerekenler
-bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review katılımcıları: Orhan Emre Anıl, Can Zunal, Berke Karaali, Oya Gizem Karaca, Başak aydın
-
+bağış ve bildirim özellikleri olarak kararlaştırıldı.
+- **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal, Berke Karaali, Oya Gizem Karaca, Başak aydın
 - **Sprint Retrospective:**
-
   - Firebase ve firestore işlemlerinin en kısa zamanda bitirilmesi kararlaştırıldı.
   - Home Page dizaynı ve NavBar'ların oluşturulmasına karar verilmiştir.
   - Zinciri kırma ve not kaydetme barlarının dizaynına karar verilmiştir.
@@ -91,7 +85,6 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
  
 ## Sprint 2
 - **Sprint Notları:** Sprint planlama toplantısında karar verildiği üzere bu sprintte Home Page ve Chain Page tasarımları ve kodlarına odaklanılmıştır. Chain page üzerine daha fazla düşünülmesi önemli. Bu mantıkla hareket ettiğimizde Home page çalışmalarının 3.printte de devam edilmesine karar verildi. Chain page'in not alma kısımları da olduğunda o bölümün çalışmaları da 3.Sprintte devam edilmesine karar verildi.
-  
 - **Sprint içinde tamamlanması tahmin edilen puan:** 110 
 - **Puan tamamlama mantığı:** Toplamda proje boyunca tamamlanılması gereken 320 puanlık backlog bulunmaktadır. Bu sprintte de yine toplam puanı 100 olarak belirlendi.
 
@@ -107,11 +100,12 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı. Sprint Review kat�
 ![Screenshot 8](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/validationCreateNewGoal.PNG)
 ![Screenshot 9](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/goalsPage.PNG)
 ![Screenshot 10](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/goalsPage_2.PNG)
-
+![Screenshot 11](https://github.com/orhanea/team-f118/blob/948610c7f30c233aef1beca9825c8dd0e4f31300/ProjectManagement/Sprint%202/Profile1.png)
+![Screenshot 12](https://github.com/orhanea/team-f118/blob/948610c7f30c233aef1beca9825c8dd0e4f31300/ProjectManagement/Sprint%202/Profile2.png)
 
 - **Bookchain Durumu**: Ekran görüntüleri:
-- **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir. Sprint Review katılımcıları: Orhan Emre Anıl, Can Zunal, Berke Karaali
-  
+- **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir.
+- **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal, Berke Karaali
 - **Sprint Retrospective:**
   - Donation page implementasyonunun 3. sprintte yapılmasına karar verildi.
   - Firebase kullanarak kullanıcıya bildirimler gönderilmesininin 3. sprintte yapılmasına karar verildi.

@@ -103,6 +103,7 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 ![Screenshot 10](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/goalsPage_2.PNG)
 ![Screenshot 11](https://github.com/orhanea/team-f118/blob/948610c7f30c233aef1beca9825c8dd0e4f31300/ProjectManagement/Sprint%202/Profile1.png)
 ![Screenshot 12](https://github.com/orhanea/team-f118/blob/948610c7f30c233aef1beca9825c8dd0e4f31300/ProjectManagement/Sprint%202/Profile2.png)
+![Screenshot 13](https://github.com/orhanea/team-f118/blob/b7113e947f977cc66755d663dcaed76a65de2128/ProjectManagement/Sprint%202/Homepage.jpg)
 
 - **Bookchain Durumu**: Ekran görüntüleri:
 - **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir.

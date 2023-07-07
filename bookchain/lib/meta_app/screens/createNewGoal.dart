@@ -57,14 +57,12 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
   void createGoal() {
     if (_formKey.currentState!.validate()) {
       // The form is valid, proceed with creating the goal
-      final currentUserUid = currentUser!.uid; // Get the current user's UID
+      final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
 
-      print(currentUserUid);
       final userDocRef =
           FirebaseFirestore.instance.collection('users').doc(currentUserUid);
 
-      final goalsCollection = userDocRef.collection(
-          'goals'); // Reference to the goals collection inside the user's document
+      final goalsCollection = userDocRef.collection('goals');
 
       goalsCollection
           .doc() // Generate a new document ID

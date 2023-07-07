@@ -1,16 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:bookchain/services/auth_methods.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bookchain/meta_app/components/rounded_button.dart';
 import 'package:bookchain/meta_app/components/rounded_input_field.dart';
 import 'package:bookchain/meta_app/components/rounded_password_field.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
+import 'package:bookchain/services/auth_methods.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpScreen extends StatefulWidget {
-
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,14 +15,13 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   Authorizations myAuth = Authorizations();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: size.height,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -117,8 +113,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               RoundedButton(
                 text: Strings.stringInstance.signIn,
                 press: () {
-                  myAuth.createUserAndCollection(); // Register the user when the button is pressed
-                }, 
+                  myAuth
+                      .createUserAndCollection(); // Register the user when the button is pressed
+                },
                 color: ColorSpecs.colorInstance.kPrimaryColor,
               ),
               Padding(

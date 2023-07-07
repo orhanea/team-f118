@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import '../components/rounded_button.dart';
-import '../helpers/constants/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -32,7 +30,8 @@ class EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser;
-    final userData = FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
+    final userData =
+        FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
     final picsCollection = FirebaseFirestore.instance.collection('pics');
 
     return Scaffold(
@@ -61,7 +60,8 @@ class EditProfilePageState extends State<EditProfilePage> {
                       radius: 50.0,
                       backgroundImage: _avatarImage != null
                           ? FileImage(_avatarImage!) as ImageProvider<Object>
-                          : AssetImage('assets/images/profile.png') as ImageProvider<Object>,
+                          : AssetImage('assets/images/profile.png')
+                              as ImageProvider<Object>,
                     ),
                   ),
                   const SizedBox(height: 16.0),
@@ -140,7 +140,8 @@ class EditProfilePageState extends State<EditProfilePage> {
 
   Future<void> _updateProfile() async {
     final currentUser = FirebaseAuth.instance.currentUser;
-    final userData = FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
+    final userData =
+        FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
     final picsCollection = FirebaseFirestore.instance.collection('pics');
 
     final updatedUsername = _usernameController.text.trim();
@@ -149,7 +150,8 @@ class EditProfilePageState extends State<EditProfilePage> {
     try {
       if (_avatarImage != null) {
         final imageName = '${currentUser.uid}_profile.jpg';
-        final storageRef = firebase_storage.FirebaseStorage.instance.ref().child(imageName);
+        final storageRef =
+            firebase_storage.FirebaseStorage.instance.ref().child(imageName);
         await storageRef.putFile(_avatarImage!);
         final imageUrl = await storageRef.getDownloadURL();
 

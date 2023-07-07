@@ -1,12 +1,11 @@
-import 'package:bookchain/meta_app/helpers/constants/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'package:bookchain/meta_app/helpers/constants/assets.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/paddings.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
 import 'package:bookchain/meta_app/helpers/constants/textStyles.dart';
 import 'package:bookchain/meta_app/helpers/routers/constant_route.dart';
+import 'package:flutter/material.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 
 import 'welcomeScreens.dart';
 

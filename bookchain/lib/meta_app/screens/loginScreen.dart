@@ -1,18 +1,16 @@
 import 'package:bookchain/meta_app/components/rounded_button.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-import 'package:bookchain/meta_app/screens/createNewGoal.dart';
+import 'package:bookchain/meta_app/screens/chainPage.dart';
 import 'package:bookchain/meta_app/screens/forgotPassword.dart';
-import 'package:bookchain/meta_app/screens/homePage.dart';
 import 'package:bookchain/meta_app/screens/signupScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:bookchain/services/auth_methods.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../components/already_have_account.dart';
 import '../components/rounded_input_field.dart';
 import '../components/rounded_password_field.dart';
-import 'chainPage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -112,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: size.height * 0.02,
               ),
               RoundedButton(
-                text: Strings.stringInstance.signIn,
+                text: Strings.stringInstance.loginSignIn,
                 press: () async {
                   try {
                     await myAuth.signInUser(
@@ -122,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => ChainPage(),
                       ),
                     );
                   } catch (error) {

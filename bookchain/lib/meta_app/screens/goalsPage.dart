@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,13 +11,18 @@ class GoalsPage extends StatefulWidget {
 class _GoalsPageState extends State<GoalsPage> {
   CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   DateTime _focusedDay = DateTime.now();
-  DateTime _selectedDay = DateTime.now();
-
+  DateTime? _selectedDay = DateTime.now();
   Map<DateTime, List<dynamic>> _events = {};
+  late String currentUserUid;
 
   Future<void> _fetchEvents() async {
-    QuerySnapshot goalsSnapshot =
-        await FirebaseFirestore.instance.collection('goals').get();
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot goalsSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUserUid)
+        .collection('goals')
+        .get();
 
     setState(() {
       _events = {};
@@ -45,6 +51,8 @@ class _GoalsPageState extends State<GoalsPage> {
   @override
   void initState() {
     super.initState();
+    currentUserUid =
+        FirebaseAuth.instance.currentUser!.uid; // Assign the value here
     _fetchEvents();
   }
 
@@ -57,17 +65,6 @@ class _GoalsPageState extends State<GoalsPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 16.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Now, today',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           SizedBox(height: 16.0),
           Expanded(
             child: Column(
@@ -104,7 +101,9 @@ class _GoalsPageState extends State<GoalsPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    'Goals for $_selectedDay',
+                    _selectedDay == null
+                        ? 'Goals for the user'
+                        : 'Goals for ${_selectedDay?.day}-${_selectedDay?.month}-${_selectedDay?.year}',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -112,12 +111,29 @@ class _GoalsPageState extends State<GoalsPage> {
                   ),
                 ),
                 SizedBox(height: 8.0),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedDay = null;
+                    });
+                  },
+                  child: Text('Show All Goals'),
+                ),
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('goals')
-                        .where('date', isEqualTo: _selectedDay)
-                        .snapshots(),
+                    stream: _selectedDay == null
+                        ? FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(currentUserUid)
+                            .collection('goals')
+                            .snapshots()
+                        : FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(currentUserUid)
+                            .collection('goals')
+                            .where('date',
+                                isEqualTo: Timestamp.fromDate(_selectedDay!))
+                            .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());
@@ -152,7 +168,6 @@ class _GoalsPageState extends State<GoalsPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              subtitle: Text(goalData['notes']),
                             ),
                           );
                         }).toList(),

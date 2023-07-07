@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ColorSpecs {
-
   static ColorSpecs colorInstance = ColorSpecs._init();
 
   ColorSpecs._init();
@@ -15,5 +14,4 @@ class ColorSpecs {
   final Color neutral = const Color(0xff64748B);
   final Color kPrimaryColor = const Color(0xff4F95FF);
   final Color kPrimaryLightColor = const Color(0xffE9F4FE);
-
 }

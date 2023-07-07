@@ -53,7 +53,9 @@ dependencies:
   table_calendar: ^3.0.9
   image_picker: ^1.0.0
   percent_indicator: ^4.0.0
-  curved_navigation_bar: ^1.0.3
+  gradients: ^0.1.1+2
+  fl_chart: ^0.62.0
+  vertical_barchart: ^2.0.0+2
 
 
 dev_dependencies:

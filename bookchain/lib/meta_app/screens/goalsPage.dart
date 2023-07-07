@@ -98,27 +98,33 @@ class _GoalsPageState extends State<GoalsPage> {
                   ),
                 ),
                 SizedBox(height: 16.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    _selectedDay == null
-                        ? 'Goals for the user'
-                        : 'Goals for ${_selectedDay?.day}-${_selectedDay?.month}-${_selectedDay?.year}',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        _selectedDay == null
+                            ? 'Goals for the user'
+                            : 'Goals for ${_selectedDay?.day}-${_selectedDay?.month}-${_selectedDay?.year}',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 8.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _selectedDay = null;
+                        });
+                      },
+                      child: Text('Show All Goals'),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 8.0),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _selectedDay = null;
-                    });
-                  },
-                  child: Text('Show All Goals'),
-                ),
+                SizedBox(height: 16.0),
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: _selectedDay == null
@@ -168,6 +174,9 @@ class _GoalsPageState extends State<GoalsPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              subtitle: Text(
+                                'Date: ${_formatTimestamp(goalData['date'])}',
+                              ),
                             ),
                           );
                         }).toList(),
@@ -182,4 +191,9 @@ class _GoalsPageState extends State<GoalsPage> {
       ),
     );
   }
+}
+
+String _formatTimestamp(Timestamp timestamp) {
+  DateTime dateTime = timestamp.toDate();
+  return '${dateTime.day}-${dateTime.month}-${dateTime.year}';
 }

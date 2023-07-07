@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GoalsPage extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class GoalsPage extends StatefulWidget {
 }
 
 class _GoalsPageState extends State<GoalsPage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
 

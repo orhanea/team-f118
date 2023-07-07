@@ -1,10 +1,10 @@
+import 'package:bookchain/meta_app/screens/chainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-
 import 'goalsPage.dart';
 
 class CreateNewGoal extends StatefulWidget {
@@ -57,12 +57,20 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
   void createGoal() {
     if (_formKey.currentState!.validate()) {
       // The form is valid, proceed with creating the goal
-      final goalsCollection = FirebaseFirestore.instance.collection('goals');
-      goalsCollection.add({
+      final currentUserUid = currentUser!.uid; // Get the current user's UID
+
+      print(currentUserUid);
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(currentUserUid);
+
+      final goalsCollection = userDocRef.collection(
+          'goals'); // Reference to the goals collection inside the user's document
+
+      goalsCollection
+          .doc() // Generate a new document ID
+          .set({
         'name': nameController.text,
         'date': selectedDate,
-        'taskDetails': taskDetailsController.text,
-        'frequency': selectedFrequency,
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
         'notes': notesController.text,
@@ -70,9 +78,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
         // Goal created successfully
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  GoalsPage()), // Replace GoalsPage with the actual page for goals
+          MaterialPageRoute(builder: (context) => ChainPage()),
         );
       }).catchError((error) {
         // An error occurred while creating the goal
@@ -199,72 +205,6 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                       ),
                     ),
                   ],
-                ),
-                SizedBox(height: 12),
-                TextFormField(
-                  controller: taskDetailsController,
-                  decoration: InputDecoration(
-                    labelText: 'Add Task',
-                    labelStyle: GoogleFonts.inter(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 15,
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.add_circle,
-                      color: Colors.grey,
-                      size: 20.0,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  value: selectedFrequency ??
-                      'Daily', // Set the desired initial value
-                  onChanged: (newValue) {
-                    setState(() {
-                      selectedFrequency = newValue;
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: 'Daily',
-                      child: Text(
-                        'Daily',
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Weekly',
-                      child: Text(
-                        'Weekly',
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Monthly',
-                      child: Text(
-                        'Monthly',
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
                 ),
                 SizedBox(height: 16),
                 Row(

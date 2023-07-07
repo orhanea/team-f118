@@ -10,7 +10,6 @@ import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
 
 class SignUpScreen extends StatefulWidget {
-
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +17,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   Authorizations myAuth = Authorizations();
 
   @override
@@ -117,8 +115,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               RoundedButton(
                 text: Strings.stringInstance.signIn,
                 press: () {
-                  myAuth.createUserAndCollection(); // Register the user when the button is pressed
-                }, 
+                  myAuth
+                      .createUserAndCollection(); // Register the user when the button is pressed
+                },
                 color: ColorSpecs.colorInstance.kPrimaryColor,
               ),
               Padding(

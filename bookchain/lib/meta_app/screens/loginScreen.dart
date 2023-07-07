@@ -1,31 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bookchain/meta_app/components/rounded_button.dart';
+import 'package:bookchain/meta_app/components/rounded_input_field.dart';
+import 'package:bookchain/meta_app/components/rounded_password_field.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-import 'package:bookchain/meta_app/screens/createNewGoal.dart';
-import 'package:bookchain/meta_app/screens/forgotPassword.dart';
-import 'package:bookchain/meta_app/screens/homePage.dart';
-import 'package:bookchain/meta_app/screens/signupScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:bookchain/services/auth_methods.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../components/already_have_account.dart';
-import '../components/rounded_input_field.dart';
-import '../components/rounded_password_field.dart';
+
 import 'chainPage.dart';
+import 'forgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Authorizations myAuth = Authorizations();
+  final _auth = FirebaseAuth.instance;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  String errorMessage = '';
+
+  void signInUser(BuildContext context) async {
+    try {
+      print(emailController.text);
+      final userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (userCredential.user != null) {
+        // Login successful, navigate to the home page or desired screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ChainPage()),
+        );
+      }
+    } catch (e) {
+      // Login failed, display an error message
+      setState(() {
+        if (e is FirebaseAuthException) {
+          if (e.code == 'wrong-password') {
+            errorMessage = 'Wrong password. Please try again.';
+          } else if (e.code == 'user-not-found') {
+            errorMessage = 'User not found. Please check your email.';
+          } else {
+            errorMessage = 'Login failed. Please try again.';
+          }
+        } else {
+          errorMessage = 'Login failed. Please try again.';
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +92,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   RoundedInputField(
                     icon: Icons.mail,
                     hintText: 'Enter your email',
-                    onChanged: (value) {},
-                    myController: email,
+                    onChanged: (value) {
+                      emailController.text = value;
+                    },
+                    myController: emailController,
                   ),
                 ],
               ),
@@ -81,16 +117,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       RoundedPasswordField(
-                        onChanged: (value) {},
-                        myController: password,
+                        onChanged: (value) {
+                          passwordController.text = value;
+                        },
+                        myController: passwordController,
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const ForgotPasswordScreen(),
+                              builder: (context) => ForgotPasswordScreen(),
                             ),
                           );
                         },
@@ -114,22 +151,16 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 text: Strings.stringInstance.signIn,
                 press: () async {
-                  try {
-                    await myAuth.signInUser(
-                      email: email.text,
-                      password: password.text,
-                    );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  } catch (error) {
-                    // Handle any error that occurs during login, such as displaying an error message.
-                  }
+                  signInUser(context);
                 },
                 color: ColorSpecs.colorInstance.kPrimaryColor,
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              Text(
+                errorMessage,
+                style: TextStyle(color: Colors.red),
               ),
               SizedBox(
                 height: size.height * 0.01,
@@ -200,16 +231,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(
                 height: size.height * 0.001,
-              ),
-              AlreadyHaveAnAccountCheck(
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignUpScreen(),
-                    ),
-                  );
-                },
               ),
             ],
           ),

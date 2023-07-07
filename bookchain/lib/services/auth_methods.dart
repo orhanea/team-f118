@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:bookchain/meta_app/screens/chainPage.dart';
 
 class Authorizations {
   String? userName;
@@ -36,16 +37,50 @@ class Authorizations {
     }
   }
 
-  Future<void> signInUser(
+  Future<bool> signInUser(BuildContext context,
       {required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      // Check if the user's password matches the provided password
+      if (userCredential.user != null) {
+        // Fetch the user document from Firestore
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .get();
+
+        // Get the stored password from the user document
+        String storedPassword = userDoc.get('password');
+
+        // Check if the stored password matches the provided password
+        if (storedPassword == password) {
+          // Passwords match, proceed to the home page or desired screen
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChainPage(),
+            ),
+          );
+          return true;
+        } else {
+          // Passwords don't match, display an error message
+          errorMessage = 'Incorrect password. Please try again.';
+          return false;
+        }
+      } else {
+        errorMessage =
+            'Failed to sign in. Please check your credentials and try again.';
+        return false;
+      }
     } catch (error) {
       errorMessage =
           'Failed to sign in. Please check your credentials and try again.';
+      return false;
     }
   }
 

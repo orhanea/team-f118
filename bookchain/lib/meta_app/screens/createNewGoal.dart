@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
+
+import 'goalsPage.dart';
 
 class CreateNewGoal extends StatefulWidget {
   const CreateNewGoal({Key? key}) : super(key: key);
@@ -51,6 +54,49 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
     }
   }
 
+  void createGoal() {
+    if (_formKey.currentState!.validate()) {
+      // The form is valid, proceed with creating the goal
+      final goalsCollection = FirebaseFirestore.instance.collection('goals');
+      goalsCollection.add({
+        'name': nameController.text,
+        'date': selectedDate,
+        'taskDetails': taskDetailsController.text,
+        'frequency': selectedFrequency,
+        'startTime': startTimeController.text,
+        'endTime': endTimeController.text,
+        'notes': notesController.text,
+      }).then((value) {
+        // Goal created successfully
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  GoalsPage()), // Replace GoalsPage with the actual page for goals
+        );
+      }).catchError((error) {
+        // An error occurred while creating the goal
+        // Handle the error accordingly
+      });
+    }
+  }
+
+  final nameController = TextEditingController();
+  final taskDetailsController = TextEditingController();
+  final startTimeController = TextEditingController();
+  final endTimeController = TextEditingController();
+  final notesController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    taskDetailsController.dispose();
+    startTimeController.dispose();
+    endTimeController.dispose();
+    notesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +122,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                   children: [
                     Expanded(
                       child: TextFormField(
+                        controller: nameController,
                         decoration: InputDecoration(
                           labelText: 'Name',
                           labelStyle: GoogleFonts.inter(
@@ -155,6 +202,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                 ),
                 SizedBox(height: 12),
                 TextFormField(
+                  controller: taskDetailsController,
                   decoration: InputDecoration(
                     labelText: 'Add Task',
                     labelStyle: GoogleFonts.inter(
@@ -225,6 +273,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                     Flexible(
                       flex: 2,
                       child: TextFormField(
+                        controller: startTimeController,
                         decoration: InputDecoration(
                           labelText: 'Start time',
                           labelStyle: GoogleFonts.inter(
@@ -242,6 +291,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                     Flexible(
                       flex: 2,
                       child: TextFormField(
+                        controller: endTimeController,
                         decoration: InputDecoration(
                           labelText: 'End time',
                           labelStyle: GoogleFonts.inter(
@@ -261,6 +311,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
+                  controller: notesController,
                   decoration: InputDecoration(
                     labelText: 'Tap to add notes',
                     labelStyle: GoogleFonts.inter(
@@ -275,12 +326,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
                 ),
                 SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // The form is valid, proceed with creating the goal
-                      createGoal();
-                    }
-                  },
+                  onPressed: createGoal,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
@@ -306,9 +352,5 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
         ),
       ),
     );
-  }
-
-  void createGoal() {
-    // Handle create goal button press
   }
 }

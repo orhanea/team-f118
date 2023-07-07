@@ -64,10 +64,8 @@ class WelcomeScreen extends StatelessWidget {
               textColor: Colors.white,
               color: ColorSpecs.colorInstance.kPrimaryColor,
               press: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
               },
             ),
             Container(

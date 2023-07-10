@@ -29,7 +29,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (user != null) {
         // Fetch the user details from Firestore and retrieve the username and email.
         DocumentSnapshot<Map<String, dynamic>> snapshot =
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user.uid)
+                .get();
         // Check if the data exists or not.
         if (snapshot.exists) {
           setState(() {
@@ -47,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _navigateToEditProfile() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (BuildContext context) => const EditProfilePage()),
+      MaterialPageRoute(
+          builder: (BuildContext context) => const EditProfilePage()),
     );
   }
 
@@ -69,7 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: ColorSpecs.colorInstance.kPrimaryColor.withOpacity(.5),
+                    color:
+                        ColorSpecs.colorInstance.kPrimaryColor.withOpacity(.5),
                     width: 5.0,
                   ),
                 ),

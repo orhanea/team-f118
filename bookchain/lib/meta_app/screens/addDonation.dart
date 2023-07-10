@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddDonationPage extends StatefulWidget {
   @override
@@ -7,15 +8,48 @@ class AddDonationPage extends StatefulWidget {
 }
 
 class _AddDonationPageState extends State<AddDonationPage> {
-  late String selectedProvince = provinces[0];
-  late String selectedDistrict = districts[selectedProvince]![0];
+  List<String> provinces = [];
+  late String selectedProvince = '';
+  Map<String, List<String>> districts = {};
+  late String selectedDistrict = '';
 
-  List<String> provinces = ['Province 1', 'Province 2', 'Province 3'];
-  Map<String, List<String>> districts = {
-    'Province 1': ['District A', 'District B', 'District C'],
-    'Province 2': ['District D', 'District E', 'District F'],
-    'Province 3': ['District G', 'District H', 'District I'],
-  };
+  @override
+  void initState() {
+    super.initState();
+    loadProvinces();
+  }
+
+  Future<void> loadProvinces() async {
+    final QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('provinces').get();
+
+    setState(() {
+      provinces = querySnapshot.docs.map((doc) => doc.id).toList();
+      selectedProvince = provinces[0];
+      districts = {};
+      selectedDistrict = '';
+    });
+
+    loadDistricts(selectedProvince);
+  }
+
+  Future<void> loadDistricts(String province) async {
+    final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('provinces')
+        .doc(province)
+        .collection('districts')
+        .get();
+
+    final List<String> districtList =
+        querySnapshot.docs.map((doc) => doc['district'] as String).toList();
+
+    setState(() {
+      districts = {
+        province: districtList,
+      };
+      selectedDistrict = districtList[0];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +71,7 @@ class _AddDonationPageState extends State<AddDonationPage> {
               onChanged: (String? newValue) {
                 setState(() {
                   selectedProvince = newValue!;
-                  selectedDistrict = "";
+                  loadDistricts(selectedProvince);
                 });
               },
               items: provinces.map<DropdownMenuItem<String>>((String province) {
@@ -59,15 +93,13 @@ class _AddDonationPageState extends State<AddDonationPage> {
                   selectedDistrict = newValue!;
                 });
               },
-              items: selectedProvince == null
-                  ? null
-                  : districts[selectedProvince]
-                      ?.map<DropdownMenuItem<String>>((String district) {
-                      return DropdownMenuItem<String>(
-                        value: district,
-                        child: Text(district),
-                      );
-                    }).toList(),
+              items: districts[selectedProvince]!
+                  .map<DropdownMenuItem<String>>((String district) {
+                return DropdownMenuItem<String>(
+                  value: district,
+                  child: Text(district),
+                );
+              }).toList(),
             ),
             SizedBox(height: 20),
             ElevatedButton(

@@ -1,3 +1,4 @@
+import 'package:bookchain/meta_app/screens/addDonation.dart';
 import 'package:bookchain/meta_app/screens/notificationPage.dart';
 import 'package:bookchain/meta_app/screens/profileScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -203,10 +204,17 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigate to a new page when the button is pressed
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddDonationPage()),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.indigoAccent), // Butonun arkaplan rengi
+                        Colors.indigoAccent), // Buttonun arkaplan rengi
                   ),
                   child: Text(
                     'Bağış Yap',

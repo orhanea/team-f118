@@ -89,7 +89,7 @@ class Authorizations {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      await googleUser?.authentication;
 
       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
         final credential = GoogleAuthProvider.credential(
@@ -97,15 +97,21 @@ class Authorizations {
           idToken: googleAuth?.idToken,
         );
         UserCredential userCredential =
-            await _auth.signInWithCredential(credential);
+        await FirebaseAuth.instance.signInWithCredential(credential);
         if (userCredential.user != null) {
-          if (userCredential.additionalUserInfo!.isNewUser) {}
+          if (userCredential.additionalUserInfo!.isNewUser) {
+            // Do something if the user is new
+          }
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
         }
-        Navigator.pushNamedAndRemoveUntil(context,
-            RouteConstant.homeScreenRoute, (Route<dynamic> route) => false);
       }
     } on FirebaseAuthException catch (e) {
-      showToast(context, e.message!);
+      print(e);
     }
   }
   

@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:bookchain/meta_app/components/rounded_button.dart';
 import 'package:bookchain/meta_app/components/rounded_input_field.dart';
 import 'package:bookchain/meta_app/components/rounded_password_field.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bookchain/meta_app/components/loadingScreen.dart';
-import 'chainPage.dart';
+import 'package:bookchain/meta_app/screens/homePage.dart';
 import 'forgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
+  
   const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
+  
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  
   final _auth = FirebaseAuth.instance;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool loading = false;
+  bool googleLoading = false;
   String errorMessage = '';
 
   Future<void> signInUser() async {
@@ -59,6 +64,49 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         errorMessage = 'Invalid email or password';
         loading = false;
+      });
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      setState(() {
+        googleLoading = true;
+        errorMessage = '';
+      });
+
+      // Trigger the Google sign-in flow.
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        // Obtain the authentication details from the Google user.
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+        // Create a new credential using the Google authentication details.
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Sign in to Firebase with the Google credential.
+        final UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+        if (userCredential.user != null) {
+          setState(() {
+            googleLoading = false;
+          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Failed to sign in with Google. Please try again.';
+        googleLoading = false;
       });
     }
   }
@@ -235,9 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          onPressed: () async {
-                            await context.read<FirebaseAuthMethods>().signInWithGoogle(context);
-                          },
+                          onPressed: _signInWithGoogle,
                           child: Image.asset(
                             'assets/icons/googleicon.png',
                           ),

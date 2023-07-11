@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bookchain/meta_app/components/loadingScreen.dart';
 
 class AddDonationPage extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _AddDonationPageState extends State<AddDonationPage> {
   late String selectedProvince = '';
   Map<String, List<String>> districts = {};
   late String selectedDistrict = '';
+  bool loading = false;
 
   @override
   void initState() {
@@ -20,6 +22,10 @@ class _AddDonationPageState extends State<AddDonationPage> {
   }
 
   Future<void> loadProvinces() async {
+    setState(() {
+      loading = true;
+    });
+
     final QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('provinces').get();
 
@@ -28,6 +34,7 @@ class _AddDonationPageState extends State<AddDonationPage> {
       selectedProvince = provinces[0];
       districts = {};
       selectedDistrict = '';
+      loading = false;
     });
 
     loadDistricts(selectedProvince);
@@ -47,71 +54,76 @@ class _AddDonationPageState extends State<AddDonationPage> {
       districts = {
         province: districtList,
       };
-      selectedDistrict = districtList[0];
+      selectedDistrict = districtList.isNotEmpty ? districtList[0] : '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Donation'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Select Province:',
-              style: TextStyle(fontSize: 18),
+    return loading
+        ? LoadingScreen()
+        : Scaffold(
+            appBar: AppBar(
+              title: Text('Add Donation'),
             ),
-            DropdownButton<String>(
-              value: selectedProvince,
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedProvince = newValue!;
-                  loadDistricts(selectedProvince);
-                });
-              },
-              items: provinces.map<DropdownMenuItem<String>>((String province) {
-                return DropdownMenuItem<String>(
-                  value: province,
-                  child: Text(province),
-                );
-              }).toList(),
+            body: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Select Province:',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  DropdownButton<String>(
+                    value: selectedProvince,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedProvince = newValue!;
+                        loadDistricts(selectedProvince);
+                      });
+                    },
+                    items: provinces
+                        .map<DropdownMenuItem<String>>((String province) {
+                      return DropdownMenuItem<String>(
+                        value: province,
+                        child: Text(province),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Select District:',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  DropdownButton<String>(
+                    value: selectedDistrict,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDistrict = newValue!;
+                      });
+                    },
+                    items: districts[selectedProvince] != null
+                        ? districts[selectedProvince]!
+                            .map<DropdownMenuItem<String>>((String district) {
+                            return DropdownMenuItem<String>(
+                              value: district,
+                              child: Text(district),
+                            );
+                          }).toList()
+                        : [],
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add donation logic here
+                    },
+                    child: Text('Add Donation'),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Select District:',
-              style: TextStyle(fontSize: 18),
-            ),
-            DropdownButton<String>(
-              value: selectedDistrict,
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedDistrict = newValue!;
-                });
-              },
-              items: districts[selectedProvince]!
-                  .map<DropdownMenuItem<String>>((String district) {
-                return DropdownMenuItem<String>(
-                  value: district,
-                  child: Text(district),
-                );
-              }).toList(),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Add donation logic here
-              },
-              child: Text('Add Donation'),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   @override

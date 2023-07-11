@@ -235,7 +235,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            await context.read<FirebaseAuthMethods>().signInWithGoogle(context);
+                          },
                           child: Image.asset(
                             'assets/icons/googleicon.png',
                           ),

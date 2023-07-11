@@ -84,6 +84,30 @@ class Authorizations {
     }
   }
 
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+        UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        if (userCredential.user != null) {
+          if (userCredential.additionalUserInfo!.isNewUser) {}
+        }
+        Navigator.pushNamedAndRemoveUntil(context,
+            RouteConstant.homeScreenRoute, (Route<dynamic> route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      showToast(context, e.message!);
+    }
+  }
+  
   Future<void> createUserCollection({
     required String userId,
     required String username,

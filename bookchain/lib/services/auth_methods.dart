@@ -99,9 +99,6 @@ class Authorizations {
         UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
         if (userCredential.user != null) {
-          if (userCredential.additionalUserInfo!.isNewUser) {
-            // Do something if the user is new
-          }
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

@@ -2,10 +2,7 @@ import 'package:bookchain/meta_app/screens/chainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bookchain/meta_app/helpers/constants/strings.dart';
-import 'goalsPage.dart';
 
 class CreateNewGoal extends StatefulWidget {
   const CreateNewGoal({Key? key}) : super(key: key);
@@ -54,7 +51,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
     }
   }
 
-  void createGoal() {
+    void createGoal() {
     if (_formKey.currentState!.validate()) {
       // The form is valid, proceed with creating the goal
       final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
@@ -72,6 +69,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
         'startTime': startTimeController.text,
         'endTime': endTimeController.text,
         'notes': notesController.text,
+        'completed': false, 
       }).then((value) {
         // Goal created successfully
         Navigator.push(
@@ -84,7 +82,7 @@ class _CreateNewGoalState extends State<CreateNewGoal> {
       });
     }
   }
-
+  
   final nameController = TextEditingController();
   final taskDetailsController = TextEditingController();
   final startTimeController = TextEditingController();

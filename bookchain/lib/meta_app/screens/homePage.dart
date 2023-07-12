@@ -9,13 +9,18 @@ import 'package:vertical_barchart/vertical-barchart.dart';
 import 'package:vertical_barchart/vertical-barchartmodel.dart';
 
 class HomePage extends StatefulWidget {
+  
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
+  
 }
 
 class _HomePageState extends State<HomePage> {
+  
+  int completedGoals = 0;
+
   List<VBarChartModel> bardata = [
     const VBarChartModel(
       index: 0,
@@ -99,8 +104,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> fetchUserName() async {
     if (currentUser != null) {
       await currentUser!.reload();
-      setState(
-        () {
+      setState( () {
           userName = currentUser!.displayName;
         },
       );
@@ -204,17 +208,21 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    // Navigate to a new page when the button is pressed
+                  onPressed: completedGoals >= 25
+                      ? () {
+                    // Activate donate button functionality
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => AddDonationPage()),
+                      MaterialPageRoute(builder: (context) => AddDonationPage()),
                     );
-                  },
+                  }
+                      : null, // Deactivate donate button
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.indigoAccent), // Buttonun arkaplan rengi
+                      completedGoals >= 25
+                          ? Colors.indigoAccent
+                          : Colors.grey, // Set button color based on completion status
+                    ),
                   ),
                   child: Text(
                     'Bağış Yap',

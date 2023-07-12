@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/screens/addDonation.dart';
 import 'package:bookchain/meta_app/screens/notificationPage.dart';
 import 'package:bookchain/meta_app/screens/profileScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   
   int completedGoals = 0;
+  bool isDonationButtonEnabled = false;
 
   List<VBarChartModel> bardata = [
     const VBarChartModel(
@@ -89,6 +91,30 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
+  Future<void> _fetchCompletedGoals() async {
+
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot completedGoalsSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUserUid)
+        .collection('goals')
+        .where('completed', isEqualTo: true) // Complete the goal
+        .get();
+
+    int completedGoalsCount = completedGoalsSnapshot.size;
+
+    setState(() {
+      completedGoals = completedGoalsCount; // Update completed goals count
+
+      if (completedGoalsCount >= 5) {
+        isDonationButtonEnabled = true; // Activate the donation button
+      } else {
+        isDonationButtonEnabled = false; // Deactivate the donation button
+      }
+    });
+  }
+
   late User? currentUser;
   String? userName;
   int? progress = 12;
@@ -99,6 +125,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     currentUser = FirebaseAuth.instance.currentUser;
     fetchUserName();
+    _fetchCompletedGoals(); // Fetch completed goals data
   }
 
   Future<void> fetchUserName() async {
@@ -208,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  onPressed: completedGoals >= 25
+                  onPressed: isDonationButtonEnabled
                       ? () {
                     // Activate donate button functionality
                     Navigator.push(
@@ -219,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                       : null, // Deactivate donate button
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      completedGoals >= 25
+                      isDonationButtonEnabled
                           ? Colors.indigoAccent
                           : Colors.grey, // Set button color based on completion status
                     ),

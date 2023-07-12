@@ -14,6 +14,7 @@ class _GoalsPageState extends State<GoalsPage> {
   DateTime? _selectedDay = DateTime.now();
   Map<DateTime, List<dynamic>> _events = {};
   late String currentUserUid;
+  int completedGoals = 0;
 
   Future<void> _fetchEvents() async {
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
@@ -26,6 +27,7 @@ class _GoalsPageState extends State<GoalsPage> {
 
     setState(() {
       _events = {};
+      completedGoals = 0; // Reset the completed goals count
       for (QueryDocumentSnapshot goalDoc in goalsSnapshot.docs) {
         Map<String, dynamic>? goalData =
             goalDoc.data() as Map<String, dynamic>?;
@@ -38,6 +40,9 @@ class _GoalsPageState extends State<GoalsPage> {
             _events[goalDate]!.add(goalName);
           } else {
             _events[goalDate] = [goalName];
+          }
+          if (goalData != null && goalData['completed']) {
+            completedGoals++;
           }
         }
       }

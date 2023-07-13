@@ -14,6 +14,7 @@ class _GoalsPageState extends State<GoalsPage> {
   DateTime? _selectedDay = DateTime.now();
   Map<DateTime, List<dynamic>> _events = {};
   late String currentUserUid;
+  int completedGoals = 0;
 
   Future<void> _fetchEvents() async {
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
@@ -26,6 +27,7 @@ class _GoalsPageState extends State<GoalsPage> {
 
     setState(() {
       _events = {};
+      completedGoals = 0; // Reset the completed goals count
       for (QueryDocumentSnapshot goalDoc in goalsSnapshot.docs) {
         Map<String, dynamic>? goalData =
             goalDoc.data() as Map<String, dynamic>?;
@@ -38,6 +40,9 @@ class _GoalsPageState extends State<GoalsPage> {
             _events[goalDate]!.add(goalName);
           } else {
             _events[goalDate] = [goalName];
+          }
+          if (goalData != null && goalData['completed']) {
+            completedGoals++;
           }
         }
       }
@@ -156,26 +161,49 @@ class _GoalsPageState extends State<GoalsPage> {
                           ),
                         );
                       }
-
                       return ListView(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                         children: snapshot.data!.docs.map((goalDoc) {
-                          final goalData =
-                              goalDoc.data() as Map<String, dynamic>;
+                          
+                          final goalData = goalDoc.data() as Map<String, dynamic>;
+                          final goalId = goalDoc.id;
+                          bool isCompleted = goalData['completed'] ?? false;
 
                           return Card(
                             elevation: 2.0,
-                            margin: EdgeInsets.only(bottom: 8.0),
+                            margin: const EdgeInsets.only(bottom: 8.0),
                             child: ListTile(
                               title: Text(
                                 goalData['name'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               subtitle: Text(
                                 'Date: ${_formatTimestamp(goalData['date'])}',
+                              ),
+                              trailing: Checkbox(
+                                value: isCompleted,
+                                onChanged: (value) {
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(currentUserUid)
+                                      .collection('goals')
+                                      .doc(goalId)
+                                      .update({'completed': value})
+                                      .then((_) {
+                                    setState(() {
+                                      isCompleted = value ?? false;
+                                      if (isCompleted) {
+                                        completedGoals++; // Increment completed goals count
+                                      } else {
+                                        completedGoals--; // Decrement completed goals count
+                                      }
+                                    });
+                                  }).catchError((error) {
+                                    // Handle error if update fails
+                                  });
+                                },
                               ),
                             ),
                           );

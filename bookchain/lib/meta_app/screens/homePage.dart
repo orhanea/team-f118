@@ -1,21 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/screens/addDonation.dart';
 import 'package:bookchain/meta_app/screens/notificationPage.dart';
 import 'package:bookchain/meta_app/screens/profileScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';
 import 'package:vertical_barchart/vertical-barchartmodel.dart';
 
 class HomePage extends StatefulWidget {
+  
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
+  
 }
 
 class _HomePageState extends State<HomePage> {
+  
+  int completedGoals = 0;
+  bool isDonationButtonEnabled = false;
+
   List<VBarChartModel> bardata = [
     const VBarChartModel(
       index: 0,
@@ -84,6 +91,30 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
+  Future<void> _fetchCompletedGoals() async {
+
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    QuerySnapshot completedGoalsSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUserUid)
+        .collection('goals')
+        .where('completed', isEqualTo: true) // Complete the goal
+        .get();
+
+    int completedGoalsCount = completedGoalsSnapshot.size;
+
+    setState(() {
+      completedGoals = completedGoalsCount; // Update completed goals count
+
+      if (completedGoalsCount >= 5) {
+        isDonationButtonEnabled = true; // Activate the donation button
+      } else {
+        isDonationButtonEnabled = false; // Deactivate the donation button
+      }
+    });
+  }
+
   late User? currentUser;
   String? userName;
   int? progress = 12;
@@ -94,13 +125,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     currentUser = FirebaseAuth.instance.currentUser;
     fetchUserName();
+    _fetchCompletedGoals(); // Fetch completed goals data
   }
 
   Future<void> fetchUserName() async {
     if (currentUser != null) {
       await currentUser!.reload();
-      setState(
-        () {
+      setState( () {
           userName = currentUser!.displayName;
         },
       );
@@ -204,17 +235,21 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    // Navigate to a new page when the button is pressed
+                  onPressed: isDonationButtonEnabled
+                      ? () {
+                    // Activate donate button functionality
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => AddDonationPage()),
+                      MaterialPageRoute(builder: (context) => AddDonationPage()),
                     );
-                  },
+                  }
+                      : null, // Deactivate donate button
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.indigoAccent), // Buttonun arkaplan rengi
+                      isDonationButtonEnabled
+                          ? Colors.indigoAccent
+                          : Colors.grey, // Set button color based on completion status
+                    ),
                   ),
                   child: Text(
                     'Bağış Yap',

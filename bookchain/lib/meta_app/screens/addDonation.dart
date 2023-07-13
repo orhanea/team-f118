@@ -1,7 +1,13 @@
+import 'package:bookchain/meta_app/screens/chainPage.dart';
+import 'package:bookchain/meta_app/screens/homePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bookchain/meta_app/components/loadingScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../helpers/constants/textStyles.dart';
 
 class AddDonationPage extends StatefulWidget {
   @override
@@ -15,10 +21,26 @@ class _AddDonationPageState extends State<AddDonationPage> {
   late String selectedDistrict = '';
   bool loading = false;
 
+  final TextEditingController provinceController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final _formKey = GlobalKey<FormState>(); // Create a global form key
+  late User? currentUser;
+
   @override
   void initState() {
     super.initState();
+    currentUser = FirebaseAuth.instance.currentUser;
     loadProvinces();
+    fetchUserName();
+  }
+
+  Future<void> fetchUserName() async {
+    if (currentUser != null) {
+      await currentUser!.reload();
+      setState(() {
+        userName = currentUser!.displayName;
+      });
+    }
   }
 
   Future<void> loadProvinces() async {
@@ -36,7 +58,6 @@ class _AddDonationPageState extends State<AddDonationPage> {
       selectedDistrict = '';
       loading = false;
     });
-
     loadDistricts(selectedProvince);
   }
 
@@ -58,20 +79,58 @@ class _AddDonationPageState extends State<AddDonationPage> {
     });
   }
 
+  void createGoal() {
+    if (_formKey.currentState!.validate()) {
+      // The form is valid, proceed with creating the goal
+      final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(currentUserUid);
+
+      final goalsCollection = userDocRef.collection('goals');
+
+      goalsCollection
+          .doc() // Generate a new document ID
+          .set({
+        'district': districtController.text,
+        'province': provinceController,
+      }).then((value) {
+        // Goal created successfully
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChainPage()),
+        );
+      }).catchError((error) {
+        // An error occurred while creating the goal
+        // Handle the error accordingly
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    provinceController.dispose();
+    districtController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
-        ? LoadingScreen()
+        ? const LoadingScreen()
         : Scaffold(
             appBar: AppBar(
-              title: Text('Add Donation'),
+              title: Text(
+                'Add Donation',
+                style: TextStyles.styleInstance.title2,
+              ),
             ),
             body: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Select Province:',
                     style: TextStyle(fontSize: 18),
                   ),
@@ -92,7 +151,7 @@ class _AddDonationPageState extends State<AddDonationPage> {
                     }).toList(),
                   ),
                   SizedBox(height: 20),
-                  Text(
+                  const Text(
                     'Select District:',
                     style: TextStyle(fontSize: 18),
                   ),
@@ -118,7 +177,8 @@ class _AddDonationPageState extends State<AddDonationPage> {
                     onPressed: () {
                       // Add donation logic here
                     },
-                    child: Text('Add Donation'),
+                    child: Text('Add Donation',
+                        style: TextStyle(color: Colors.blueGrey)),
                   ),
                 ],
               ),

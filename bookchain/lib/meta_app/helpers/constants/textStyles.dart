@@ -38,4 +38,9 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 15,
   );
+
+  TextStyle donationText = GoogleFonts.inter(
+    fontWeight: FontWeight.w700,
+    fontSize: 15,
+  );
 }

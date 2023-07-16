@@ -1,5 +1,7 @@
 import 'package:bookchain/meta_app/screens/donationsPage.dart';
+import 'package:bookchain/meta_app/screens/loginScreen.dart';
 import 'package:bookchain/meta_app/screens/myAccount.dart';
+import 'package:bookchain/meta_app/screens/notificationPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
@@ -60,6 +62,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (BuildContext context) => UserDonationsPage()),
+    );
+  }
+
+  void _logout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+    );
+  }
+
+  void _navigateToNotification() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => NotificationPage()),
     );
   }
 
@@ -132,9 +148,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'My Profile',
                       ),
                     ),
-                    const ProfileWidget(
-                      icon: Icons.notifications,
-                      title: 'Notifications',
+                    GestureDetector(
+                      onTap: _navigateToNotification, // Add onTap callback
+                      child: const ProfileWidget(
+                        icon: Icons.notifications,
+                        title: 'Notifications',
+                      ),
                     ),
                     GestureDetector(
                       onTap: _navigateToMyDonations, // Add onTap callback
@@ -143,9 +162,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: 'Donations',
                       ),
                     ),
-                    const ProfileWidget(
-                      icon: Icons.logout,
-                      title: 'Log Out',
+                    GestureDetector(
+                      onTap: _logout, // Add onTap callback
+                      child: const ProfileWidget(
+                        icon: Icons.logout,
+                        title: 'Log Out',
+                      ),
                     ),
                   ],
                 ),

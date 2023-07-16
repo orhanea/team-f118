@@ -1,3 +1,4 @@
+import 'package:bookchain/meta_app/screens/donationsPage.dart';
 import 'package:bookchain/meta_app/screens/myAccount.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context,
       MaterialPageRoute(
           builder: (BuildContext context) => const EditProfilePage()),
+    );
+  }
+
+  void _navigateToMyDonations() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => UserDonationsPage()),
     );
   }
 
@@ -127,6 +135,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const ProfileWidget(
                       icon: Icons.notifications,
                       title: 'Notifications',
+                    ),
+                    GestureDetector(
+                      onTap: _navigateToMyDonations, // Add onTap callback
+                      child: const ProfileWidget(
+                        icon: Icons.card_giftcard_rounded,
+                        title: 'Donations',
+                      ),
                     ),
                     const ProfileWidget(
                       icon: Icons.logout,

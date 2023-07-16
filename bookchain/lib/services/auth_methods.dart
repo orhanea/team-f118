@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bookchain/meta_app/screens/chainPage.dart';
 
+import '../meta_app/screens/homePage.dart';
+
 class Authorizations {
   String? userName;
   String? email;
@@ -89,7 +91,7 @@ class Authorizations {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
         final credential = GoogleAuthProvider.credential(
@@ -97,7 +99,7 @@ class Authorizations {
           idToken: googleAuth?.idToken,
         );
         UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+            await FirebaseAuth.instance.signInWithCredential(credential);
         if (userCredential.user != null) {
           Navigator.pushReplacement(
             context,
@@ -111,7 +113,7 @@ class Authorizations {
       print(e);
     }
   }
-  
+
   Future<void> createUserCollection({
     required String userId,
     required String username,

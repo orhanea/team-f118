@@ -1,3 +1,4 @@
+import 'package:bookchain/meta_app/screens/chainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -12,16 +13,13 @@ import 'package:bookchain/meta_app/screens/homePage.dart';
 import 'forgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
-  
   const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
-  
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  
   final _auth = FirebaseAuth.instance;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -80,7 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (googleUser != null) {
         // Obtain the authentication details from the Google user.
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
 
         // Create a new credential using the Google authentication details.
         final OAuthCredential credential = GoogleAuthProvider.credential(
@@ -89,7 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
         );
 
         // Sign in to Firebase with the Google credential.
-        final UserCredential userCredential = await _auth.signInWithCredential(credential);
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
 
         if (userCredential.user != null) {
           setState(() {

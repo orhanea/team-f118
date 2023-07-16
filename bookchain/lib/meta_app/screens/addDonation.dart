@@ -31,16 +31,6 @@ class _AddDonationPageState extends State<AddDonationPage> {
     super.initState();
     currentUser = FirebaseAuth.instance.currentUser;
     loadProvinces();
-    fetchUserName();
-  }
-
-  Future<void> fetchUserName() async {
-    if (currentUser != null) {
-      await currentUser!.reload();
-      setState(() {
-        userName = currentUser!.displayName;
-      });
-    }
   }
 
   Future<void> loadProvinces() async {
@@ -79,32 +69,62 @@ class _AddDonationPageState extends State<AddDonationPage> {
     });
   }
 
-  void createGoal() {
-    if (_formKey.currentState!.validate()) {
-      // The form is valid, proceed with creating the goal
-      final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  void addDonationCount(DocumentReference userDocRef) {
+    userDocRef.update({
+      'totalDonations': FieldValue.increment(1),
+    }).then((_) {
+//successful addition
+    }).catchError((error) {});
+  }
 
-      final userDocRef =
-          FirebaseFirestore.instance.collection('users').doc(currentUserUid);
+  void createDonation() {
+    final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+    final userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(currentUserUid);
 
-      final goalsCollection = userDocRef.collection('goals');
+    // Create a map to represent the donation data
+    final Map<String, dynamic> donationData = {
+      'district': selectedDistrict,
+      'province': selectedProvince,
+      'donationStatus': "Pending",
+      'donationTimestamp': FieldValue.serverTimestamp(),
+    };
 
-      goalsCollection
-          .doc() // Generate a new document ID
-          .set({
-        'district': districtController.text,
-        'province': provinceController,
-      }).then((value) {
-        // Goal created successfully
+    final Map<String, dynamic> userData = {
+      'userID': currentUserUid,
+      'donationStatus': "Pending",
+      'donationTimestamp': FieldValue.serverTimestamp(),
+    };
+
+    final districtDocRef = FirebaseFirestore.instance
+        .collection('provinces')
+        .doc(selectedProvince)
+        .collection('districts')
+        .doc(selectedDistrict);
+
+    final donationsCollection = userDocRef.collection('donations');
+    final userCollection = districtDocRef.collection('users');
+
+    userCollection.add(userData).then((value) {
+      // User data added successfully
+
+      // Now, add the donation data
+      donationsCollection.add(donationData).then((value) {
+        // Donation created successfully
+        addDonationCount(userDocRef);
+
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => ChainPage()),
         );
       }).catchError((error) {
-        // An error occurred while creating the goal
+        // An error occurred while creating the donation
         // Handle the error accordingly
       });
-    }
+    }).catchError((error) {
+      // An error occurred while adding user data
+      // Handle the error accordingly
+    });
   }
 
   @override
@@ -175,7 +195,7 @@ class _AddDonationPageState extends State<AddDonationPage> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Add donation logic here
+                      createDonation();
                     },
                     child: Text('Add Donation',
                         style: TextStyle(color: Colors.blueGrey)),

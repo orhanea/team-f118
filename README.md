@@ -114,3 +114,12 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
   - Chain page'e not ekleme özelliğinin getirilmesine karar verildi.
   - Firebase ve firestore login işlemlerinde çalışıyor fakat diğer kaydedilmesi gereken yerlerde tamamlamasında karar verildi.
 
+## Sprint 3
+- **Sprint Notları:** Bu sprintte, donation page, notification ve goal page'in tamamlanmasına odaklanıldı; eklenen bağış ve hedef bilgileri Firestore'da tutuldu. Ayrıca, profil sayfası düzenlendi, Google ile kaydolma seçeneği eklendi ve sayfa geçişleri arasında loading ekranı kullanıldı. Ayrıca, chain page'e not ekleme özelliği getirildi.
+- **Sprint içinde tamamlanması tahmin edilen puan:** 105
+- **Sprint Başlangıcı Görev Dağılımı**:
+- **Sprint Sonu Görev Durumu**:
+- **Daily Scrum** Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. 
+- **Bookchain Durumu**: Ekran görüntüleri:
+- **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal, Berke Karaali
+- **Sprint Retrospective:**

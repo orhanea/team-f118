@@ -82,12 +82,16 @@ class _AddDonationPageState extends State<AddDonationPage> {
     final userDocRef =
         FirebaseFirestore.instance.collection('users').doc(currentUserUid);
 
-    final donationsCollection = userDocRef.collection('donations');
-
     // Create a map to represent the donation data
     final Map<String, dynamic> donationData = {
       'district': selectedDistrict,
       'province': selectedProvince,
+      'donationStatus': "Pending",
+      'donationTimestamp': FieldValue.serverTimestamp(),
+    };
+
+    final Map<String, dynamic> userData = {
+      'userID': currentUserUid,
       'donationStatus': "Pending",
       'donationTimestamp': FieldValue.serverTimestamp(),
     };
@@ -98,15 +102,27 @@ class _AddDonationPageState extends State<AddDonationPage> {
         .collection('districts')
         .doc(selectedDistrict);
 
-    donationsCollection.add(donationData).then((value) {
-      // Donation created successfully
-      addDonationCount(districtDocRef);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ChainPage()),
-      );
+    final donationsCollection = userDocRef.collection('donations');
+    final userCollection = districtDocRef.collection('users');
+
+    userCollection.add(userData).then((value) {
+      // User data added successfully
+
+      // Now, add the donation data
+      donationsCollection.add(donationData).then((value) {
+        // Donation created successfully
+        addDonationCount(userDocRef);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChainPage()),
+        );
+      }).catchError((error) {
+        // An error occurred while creating the donation
+        // Handle the error accordingly
+      });
     }).catchError((error) {
-      // An error occurred while creating the donation
+      // An error occurred while adding user data
       // Handle the error accordingly
     });
   }

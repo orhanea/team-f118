@@ -90,12 +90,13 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 - **NOTE**: Story'ler yapılacak işlere (task'lere) bölünmüştür. Trello'da book-chain Sprint 1 panosunda gözüken yapılacak işler (task) amaçlarına göre renklendirilmiştir. Mavi item'lar story'leri temsil etmektedir.
 
 - **Sprint Başlangıcı Görev Dağılımı**:
-![Backlog 1](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/1.PNG)
+![Backlog 5](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/1.PNG)
 - **Sprint Sonu Görev Durumu**:
-![Backlog 2](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/5.PNG)
+![Backlog 6](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/5.PNG)
 
 - **Daily Scrum**: Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. ![Sprint 2 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/d6beabb9e52912d9df1726212b1800bff1b12d80/ProjectManagement/Sprint%202/Scrum%20Chats.docx)
 
+- **Bookchain Durumu**: Ekran görüntüleri:
 ![Screenshot 6](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/calendarCreateNewGoal.PNG)
 ![Screenshot 7](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/createNewGoalPage.PNG)
 ![Screenshot 8](https://github.com/orhanea/team-f118/blob/6a1b4b3f9beaaf52f82a0528a349a0782a80b828/ProjectManagement/Sprint%202/validationCreateNewGoal.PNG)
@@ -105,7 +106,6 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 ![Screenshot 12](https://github.com/orhanea/team-f118/blob/948610c7f30c233aef1beca9825c8dd0e4f31300/ProjectManagement/Sprint%202/Profile2.png)
 ![Screenshot 13](https://github.com/orhanea/team-f118/blob/b7113e947f977cc66755d663dcaed76a65de2128/ProjectManagement/Sprint%202/Homepage.jpg)
 
-- **Bookchain Durumu**: Ekran görüntüleri:
 - **Sprint Review**:  Bu sprintte Product Owner'ın tavsiyesi üzerine özellikle Firebase ile birlikte NodeJS kullanarak API oluşturma kısmına odaklanıldı. Fakat çok başarılı olunamadağı için sonradan sadece Firebase üzerinden devam edilmesine karar verildi. Chain Page öncelikli olmak üzere Home Page ve Donation Page dizaynı yapılmaya çalışıldı. Fakat Donation Page kısmı yetişmedi. Aynı zamanda hedefleri firebase'e kaydetme de yapılamadı. Sadece Chain Page,Home Page ve Profile Page bölümleri bitirilebildi.  Tecrübe eksikliği NodeJS API oluştururken etkili olmuştur. 3.sprintte Firebase kullanarak kullanıcıya bildirimler gönderilmesi, Firebase'de gerekli entegrasyonların yapılması ve Donation Page kısmının tamamlanmasına karar verilmiştir.
 - **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal, Berke Karaali
 - **Sprint Retrospective:**
@@ -119,9 +119,23 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
   
 - **Sprint içinde tamamlanması tahmin edilen puan:** 105
 - **Sprint Başlangıcı Görev Dağılımı**:
+![Backlog 7](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/G%C3%B6rev%20da%C4%9F%C4%B1l%C4%B1m%C4%B1.PNG)
+
+
 - **Sprint Sonu Görev Durumu**:
-- **Daily Scrum** Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır. 
+![Backlog 8](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Final%201.PNG)
+![Backlog 9](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Final%202.PNG)
+
+- **Daily Scrum** Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır.  ![Sprint 3 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Scrum%20Screen%20Shots.docx)
 - **Bookchain Durumu**: Ekran görüntüleri:
+  
+![Screenshot 14](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/home%20page.PNG)
+![Screenshot 15](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Profile%20screen.PNG)
+![Screenshot 16](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/My%20donations.PNG)
+![Screenshot 17](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Goals%20page.PNG)
+![Screenshot 18](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Change%20profile.PNG)
+![Screenshot 19](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Create%20goal.PNG)
+
 - **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal
 - **Sprint Retrospective:**
 - Takım üyelerinin gelecek projelerde daha fazla aktif olması gerektiğine vurgu yapılmıştır.

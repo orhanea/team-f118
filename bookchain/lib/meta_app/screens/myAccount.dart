@@ -1,12 +1,9 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import '../components/rounded_button.dart';
-import '../helpers/constants/colors.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -16,10 +13,12 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class EditProfilePageState extends State<EditProfilePage> {
+  
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
   String? _errorMessage;
+  String? avatarUrl;
   File? _avatarImage;
 
   @override
@@ -33,7 +32,6 @@ class EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser;
     final userData = FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
-    final picsCollection = FirebaseFirestore.instance.collection('pics');
 
     return Scaffold(
       appBar: AppBar(
@@ -60,8 +58,10 @@ class EditProfilePageState extends State<EditProfilePage> {
                     child: CircleAvatar(
                       radius: 50.0,
                       backgroundImage: _avatarImage != null
-                          ? FileImage(_avatarImage!) as ImageProvider<Object>
-                          : AssetImage('assets/images/profile.png') as ImageProvider<Object>,
+                          ? FileImage(_avatarImage!)
+                          : avatarUrl != null
+                          ? NetworkImage(avatarUrl!)
+                          : const AssetImage('assets/images/profile.png') as ImageProvider<Object>,
                     ),
                   ),
                   const SizedBox(height: 16.0),
@@ -79,14 +79,14 @@ class EditProfilePageState extends State<EditProfilePage> {
                     title: TextFormField(
                       controller: _emailController,
                       decoration: const InputDecoration(
-                        labelText: 'E-posta',
+                        labelText: 'Mail',
                       ),
                     ),
                   ),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: _updateProfile,
-                    child: const Text('Profili Düzenle'),
+                    onPressed: () => _updateProfile(context),
+                    child: const Text('Edit Profile'),
                   ),
                   if (_errorMessage != null)
                     Text(
@@ -96,7 +96,7 @@ class EditProfilePageState extends State<EditProfilePage> {
                 ],
               );
             } else if (snapshot.hasError) {
-              return Text('Error fetching user data');
+              return const Text('Error while fetching user data');
             } else {
               return const CircularProgressIndicator();
             }
@@ -138,10 +138,10 @@ class EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  Future<void> _updateProfile() async {
+  Future<void> _updateProfile(BuildContext context) async {
     final currentUser = FirebaseAuth.instance.currentUser;
     final userData = FirebaseFirestore.instance.collection('users').doc(currentUser!.uid);
-    final picsCollection = FirebaseFirestore.instance.collection('pics');
+    final picsCollection = userData.collection('pics');
 
     final updatedUsername = _usernameController.text.trim();
     final updatedEmail = _emailController.text.trim();
@@ -158,23 +158,22 @@ class EditProfilePageState extends State<EditProfilePage> {
           'email': updatedEmail,
         });
 
-        await picsCollection.doc(currentUser.uid).set({
+        // Update the avatar URL in the 'pics' subcollection for the specific user.
+        await picsCollection.doc('avatar').set({
           'avatarUrl': imageUrl,
         });
+
+        print('Profile Updated Successfully');
       } else {
         await userData.update({
           'username': updatedUsername,
           'email': updatedEmail,
         });
-      }
 
-      setState(() {
-        _errorMessage = null;
-      });
+        print('Profile Updated Successfully');
+      }
     } catch (error) {
-      setState(() {
-        _errorMessage = 'Failed to update profile. Please try again.';
-      });
+      print('Error updating profile: $error');
     }
   }
 }

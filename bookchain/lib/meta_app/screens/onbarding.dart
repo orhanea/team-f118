@@ -77,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
             child: _WidgetForOnBoardingBody(
               title: Strings.stringInstance.onBoardingMainTitle2,
               subTitle: Strings.stringInstance.onBoardingSubTitle2,
-              path: AssetPath.assetInstance.onBoardingImage2,
+              path: AssetPath.assetInstance.onBoardingImage3,
               opacity: opacity,
               visible: visible,
             ),
@@ -90,7 +90,7 @@ class _OnBoardingState extends State<OnBoarding> {
             child: _WidgetForOnBoardingBody(
               title: Strings.stringInstance.onBoardingMainTitle3,
               subTitle: Strings.stringInstance.onBoardingSubTitle3,
-              path: AssetPath.assetInstance.onBoardingImage3,
+              path: AssetPath.assetInstance.onBoardingImage2,
               opacity: opacity,
               visible: visible,
             ),

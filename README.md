@@ -115,12 +115,10 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
   - Firebase ve firestore login işlemlerinde çalışıyor fakat diğer kaydedilmesi gereken yerlerde tamamlamasında karar verildi.
 
 ## Sprint 3
-- **Sprint Notları:** Bu sprintte, donation page, notification ve goal page'in tamamlanmasına odaklanıldı; eklenen bağış ve hedef bilgileri Firestore'da tutuldu. Ayrıca, profil sayfası düzenlendi, Google ile kaydolma seçeneği eklendi ve sayfa geçişleri arasında loading ekranı kullanıldı. Ayrıca, chain page'e not ekleme özelliği getirildi. Firebase kullanarak kullanıcıya bildirimler gönderilme özelliği yetişmedi.
-  
+- **Sprint Notları:** Bu sprintte, donation page, notification ve goal page'in tamamlanmasına odaklanıldı; eklenen bağış ve hedef bilgileri Firestore'da tutuldu. Ayrıca, profil sayfası düzenlendi, Google ile kaydolma seçeneği eklendi ve sayfa geçişleri arasında loading ekranı kullanıldı. Ayrıca, chain page'e not ekleme özelliği getirildi. Firebase kullanarak kullanıcıya hedefler ve bağışlarla alakalı bildirimler gönderilmesi özelliği projede yaşanan akakslıklardan dolayı yetişemedi. Bununla birlikte ana ekrandaki grafik de tamamlanamadı. Bu projede alınan ders olarak grup üyelerine gerçek hayatta karşılaştıkları projeyi etkikeleyebilecek şekilde olan sorunları PO/PM, Scrum Master taraflarına aktarması olmuştur. Bundan dolayı sprintlerde aksamalar meydana gelmiştir.
 - **Sprint içinde tamamlanması tahmin edilen puan:** 105
 - **Sprint Başlangıcı Görev Dağılımı**:
 ![Backlog 7](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/G%C3%B6rev%20da%C4%9F%C4%B1l%C4%B1m%C4%B1.PNG)
-
 
 - **Sprint Sonu Görev Durumu**:
 ![Backlog 8](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Final%201.PNG)
@@ -129,7 +127,7 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 - **Daily Scrum** Daily Scrum toplantılarının ekran kayıtları ekteki word dosyasında kayıt altına alınmıştır.  ![Sprint 3 Daily Scrum Chats](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Scrum%20Screen%20Shots.docx)
 - **Bookchain Durumu**: Ekran görüntüleri:
   
-![Screenshot 14](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/home%20page.PNG)
+![Screenshot 14](https://github.com/orhanea/team-f118/blob/14a009e0937a644731385e998f6f7535e454a725/ProjectManagement/Sprint%203/home%20page.png)
 ![Screenshot 15](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Profile%20screen.PNG)
 ![Screenshot 16](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/My%20donations.PNG)
 ![Screenshot 17](https://github.com/orhanea/team-f118/blob/9d4bc62b80ae2ca02e392180d23700d610e4573b/ProjectManagement/Sprint%203/Goals%20page.PNG)
@@ -138,8 +136,8 @@ bağış ve bildirim özellikleri olarak kararlaştırıldı.
 
 - **Sprint Review katılımcıları**: Orhan Emre Anıl, Can Zunal
 - **Sprint Retrospective:**
-- Takım üyelerinin gelecek projelerde daha fazla aktif olması gerektiğine vurgu yapılmıştır.
-- Notification özelliği eklenebilir.
-- Dizaynı geliştirmeleri yapılabilir
-- Uygulamının ismindeki bookchain için zincir dizaynı eklenebilir
-- Anasayfa düzenlenebilir
+ - Notification özelliği eklenebilir.
+ - Anasayfa düzenlenebilir.
+ - Dizayn geliştirmeleri yapılabilir.
+ - Uygulamının ismindeki bookchain için zincir dizaynı eklenebilir.
+ - Takım üyelerinin gelecek projelerde daha fazla aktif olması gerektiğine vurgu yapılmıştır.

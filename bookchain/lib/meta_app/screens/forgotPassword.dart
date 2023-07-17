@@ -1,5 +1,6 @@
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
-import 'package:bookchain/meta_app/screens/passwordVerif.dart';
+import 'package:bookchain/services/auth_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/helpers/constants/strings.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,8 +18,17 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
-  final passwordController = TextEditingController();
-  final registerEmailController = TextEditingController();
+  Authorizations auth = Authorizations();
+
+  void _sendPasswordResetEmail(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      // Password reset email sent successfully
+    } catch (e) {
+      // Handle errors when sending the password reset email
+      print('Error sending password reset email: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +89,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               ),
                             ),
                             RoundedInputField(
-                                myController: registerEmailController,
+                                myController: auth.mail,
                               icon: Icons.mail,
                               hintText: 'Enter email',
-                              onChanged: (value) {} ),
-
+                              onChanged: (value) {}
+                            ),
                           ],
                         ),
                         SizedBox(height: size.height * 0.01),
                         RoundedButton(
                           text: Strings.stringInstance.codeOTP,
-                          press: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const VerificationScreen()));
-                          }, color: ColorSpecs.colorInstance.kPrimaryColor,
+                          press: () async {
+                            _sendPasswordResetEmail(auth.mail.text.trim());
+                          },
+                          color: ColorSpecs.colorInstance.kPrimaryColor,
                         ),
                       ],
                     ),
@@ -107,8 +115,4 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
-
 }
-
-
-

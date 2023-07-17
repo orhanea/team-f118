@@ -1,25 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/screens/addDonation.dart';
 import 'package:bookchain/meta_app/screens/notificationPage.dart';
 import 'package:bookchain/meta_app/screens/profileScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_barchart/vertical-barchart.dart';
 import 'package:vertical_barchart/vertical-barchartmodel.dart';
 
+import '../helpers/constants/colors.dart';
+
 class HomePage extends StatefulWidget {
-  
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
-  
 }
 
 class _HomePageState extends State<HomePage> {
-  
+
   int completedGoals = 0;
   bool isDonationButtonEnabled = false;
 
@@ -29,70 +29,53 @@ class _HomePageState extends State<HomePage> {
       label: "Pazartesi",
       colors: [Colors.orange, Colors.deepOrange],
       jumlah: 20,
-      tooltip: "20 Pcs",
-      description: Text(
-        "Most selling fruit last week",
-        style: TextStyle(fontSize: 10),
-      ),
+      tooltip: "20 ",
     ),
     const VBarChartModel(
       index: 1,
       label: "Salı",
       colors: [Colors.orange, Colors.deepOrange],
       jumlah: 55,
-      tooltip: "55 Pcs",
-      description: Text(
-        "Most selling fruit this week",
-        style: TextStyle(fontSize: 10),
-      ),
+      tooltip: "55 ",
     ),
     const VBarChartModel(
       index: 2,
       label: "Çarşamba",
       colors: [Colors.teal, Colors.indigo],
       jumlah: 12,
-      tooltip: "12 Pcs",
+      tooltip: "12 ",
     ),
     const VBarChartModel(
       index: 3,
       label: "Perşembe",
       colors: [Colors.teal, Colors.indigo],
       jumlah: 5,
-      tooltip: "5 Pcs",
+      tooltip: "5 ",
     ),
     const VBarChartModel(
       index: 4,
       label: "Cuma",
       colors: [Colors.orange, Colors.deepOrange],
       jumlah: 15,
-      tooltip: "15 Pcs",
+      tooltip: "15 ",
     ),
     const VBarChartModel(
       index: 5,
       label: "Cumartesi",
       colors: [Colors.teal, Colors.indigo],
       jumlah: 30,
-      tooltip: "30 Pcs",
-      description: Text(
-        "Favorites vegetables",
-        style: TextStyle(fontSize: 10),
-      ),
+      tooltip: "30 ",
     ),
     const VBarChartModel(
       index: 6,
       label: "Pazar",
       colors: [Colors.teal, Colors.indigo],
       jumlah: 30,
-      tooltip: "40 Pcs",
-      description: Text(
-        "Favorites vegetables",
-        style: TextStyle(fontSize: 10),
-      ),
+      tooltip: "40 ",
     ),
   ];
 
   Future<void> _fetchCompletedGoals() async {
-
     String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
 
     QuerySnapshot completedGoalsSnapshot = await FirebaseFirestore.instance
@@ -131,7 +114,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> fetchUserName() async {
     if (currentUser != null) {
       await currentUser!.reload();
-      setState( () {
+      setState(
+            () {
           userName = currentUser!.displayName;
         },
       );
@@ -143,23 +127,24 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.deepOrangeAccent,
-
-        //asagısı sıkıntılı ayar cekılcek
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProfileScreen(),
-              ),
-            );
-          },
-          child: const Icon(
-            Icons.person,
-            color: Colors.black,
-          ),
+        backgroundColor: ColorSpecs.colorInstance.bluesJeans,
+        shadowColor: Colors.black,
+        elevation: 10,
+        title: Text(
+          'Bookchain',
+          style: GoogleFonts.bebasNeue(fontSize: 32),
         ),
+        centerTitle: true,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+            child: const Icon(Icons.face)),
         actions: [
           GestureDetector(
               onTap: () {
@@ -170,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-              child: Icon(
+              child: const Icon(
                 Icons.notifications,
                 color: Colors.black,
               )),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
         ],
       ),
       body: SingleChildScrollView(
@@ -191,17 +176,14 @@ class _HomePageState extends State<HomePage> {
                 //progress container
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   margin: const EdgeInsets.all(20),
-                  /*decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: Colors.amber),*/
                   width: double.infinity,
                   child: CircularPercentIndicator(
                     radius: 90,
                     lineWidth: 15,
                     backgroundColor: Colors.black12,
-                    progressColor: Colors.deepPurpleAccent,
+                    progressColor: ColorSpecs.colorInstance.kPrimaryColor,
                     percent: 0.6,
                     center: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -240,19 +222,21 @@ class _HomePageState extends State<HomePage> {
                     // Activate donate button functionality
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddDonationPage()),
+                      MaterialPageRoute(
+                          builder: (context) => AddDonationPage()),
                     );
                   }
                       : null, // Deactivate donate button
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      isDonationButtonEnabled
-                          ? Colors.indigoAccent
-                          : Colors.grey, // Set button color based on completion status
+                        isDonationButtonEnabled
+                            ? ColorSpecs.colorInstance.neutral
+                            : ColorSpecs.colorInstance
+                            .azureIsWhite // Set button color based on completion status
                     ),
                   ),
                   child: Text(
-                    'Bağış Yap',
+                    'Make Donation',
                     style: GoogleFonts.inter(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,

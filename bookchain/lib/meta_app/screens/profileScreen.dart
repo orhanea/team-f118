@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bookchain/meta_app/screens/donationsPage.dart';
 import 'package:bookchain/meta_app/screens/loginScreen.dart';
 import 'package:bookchain/meta_app/screens/myAccount.dart';
+import 'package:bookchain/meta_app/screens/chainPage.dart';
 import 'package:bookchain/meta_app/screens/notificationPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/components/profile_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -55,6 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  void _navigateToChainPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => ChainPage()),
+    );
+  }
 
   void _navigateToEditProfile() {
     Navigator.push(
@@ -90,6 +97,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+              _navigateToChainPage();
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),

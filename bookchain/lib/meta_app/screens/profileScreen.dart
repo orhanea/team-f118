@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:bookchain/meta_app/helpers/constants/colors.dart';
 import 'package:bookchain/meta_app/components/profile_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:bookchain/meta_app/screens/myAccount.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -17,8 +16,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   String? username;
   String? email;
+  String? avatarUrl;
 
   @override
   void initState() {
@@ -30,25 +31,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        // Fetch the user details from Firestore and retrieve the username and email.
         DocumentSnapshot<Map<String, dynamic>> snapshot =
-            await FirebaseFirestore.instance
-                .collection('users')
-                .doc(user.uid)
-                .get();
-        // Check if the data exists or not.
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+
         if (snapshot.exists) {
           setState(() {
             username = snapshot.data()?['username'];
             email = snapshot.data()?['email'];
           });
         }
+
+        DocumentSnapshot<Map<String, dynamic>> avatarSnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).collection('pics').doc('avatar').get();
+
+        if (avatarSnapshot.exists) {
+          setState(() {
+            avatarUrl = avatarSnapshot.data()?['avatarUrl'];
+          });
+        }
       }
     } catch (error) {
-      // Handle any errors that occur during fetching the user details.
       print('Error fetching user details: $error');
     }
   }
+
 
   void _navigateToEditProfile() {
     Navigator.push(
@@ -68,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _logout() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+      MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()),
     );
   }
 
@@ -97,14 +103,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color:
-                        ColorSpecs.colorInstance.kPrimaryColor.withOpacity(.5),
+                    color: ColorSpecs.colorInstance.kPrimaryColor.withOpacity(.5),
                     width: 5.0,
                   ),
                 ),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 60,
-                  backgroundImage: ExactAssetImage('assets/images/profile.png'),
+                  backgroundImage: avatarUrl != null
+                      ? NetworkImage(avatarUrl!)
+                      : const AssetImage('assets/images/profile.png') as ImageProvider,
                 ),
               ),
               const SizedBox(
